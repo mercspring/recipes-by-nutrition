@@ -30,7 +30,7 @@ WHEN I paste in the link for a recipe I have found
 THEN I will see the nutritional information for that recipe
 
 
-## APIs Used
+## APIs we are using
 
 The Meal DB (https://www.themealdb.com/api.php)
 
