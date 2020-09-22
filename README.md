@@ -13,6 +13,8 @@ WHEN I search for a new recipe
 THEN my previous searches are saved in the search history
 WHEN I mark a recipe as a favorite/one I want to save
 THEN the recipe will be saved in a list I can access
+WHEN I paste in the link for a recipe I have found
+THEN I will see the nutritional information for that recipe
 
 ## APIs Used
 
