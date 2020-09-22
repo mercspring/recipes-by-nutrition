@@ -47,3 +47,7 @@ Materialize
 
 Foundation
 
+## Layout
+
+![website layout](https://raw.githubusercontent.com/mercspring/recipes-by-nutrition/dev/layout.png)
+
