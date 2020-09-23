@@ -32,7 +32,7 @@ THEN I will see the nutritional information for that recipe
 
 ## APIs Used
 
-The Meal DB (https://www.themealdb.com/api.php)
+Spoonacular (https://spoonacular.com/)
 
 EDAMAM (https://developer.edamam.com/)
 
