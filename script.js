@@ -1,1 +1,1 @@
-//Javascript goes here
+//Global Varibles
