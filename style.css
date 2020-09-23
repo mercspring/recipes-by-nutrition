@@ -1,0 +1,39 @@
+body{
+    text-align: left;
+    color: black;
+}
+
+.is-hoverable{
+    text-align: right;
+    position: absolute;
+    top: 50px;
+    right: 0px;
+    background-color: lightgreen;
+}
+
+#searchBarWrap{ 
+    text-align: center;
+    margin-top: 80px;
+    margin-left: 280px;
+    width: 50%;
+    
+}
+
+.section{
+    background-color: lightgreen;
+    
+}
+
+h2{
+    text-align: center;
+    margin-top: 150px;
+    font-weight: bolder;
+    padding: 20px;
+    
+}
+
+.button{
+    margin-left: 46.2%;
+}
+
+
