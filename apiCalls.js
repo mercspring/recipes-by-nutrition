@@ -22,8 +22,8 @@ function getNutritionInfo() {
         ]
     }
 
-    var edamamAppID = "d1ee3d45";
-    var edamamAppKey = "3c58b7f3ce63c623ef6fc3fa6ac534fa";
+    var edamamAppID = "b15b5751";
+    var edamamAppKey = "83d297e6ece544701047f8a4c809793f";
     var edamamQueryURL = `https://api.edamam.com/api/nutrition-details?app_id=${edamamAppID}&app_key=${edamamAppKey}`
 
     $.ajax({
