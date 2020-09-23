@@ -1,71 +1,53 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Recipes By Nutrition</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Recipes By Nutrition</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
-  <link rel="stylesheet" href="style.css">
-</head>
+    <section class="hero is-primary">
+        <div class="hero-body">
+          <p class="title">
+            Recipes By Nutrition 
+          </p>
+          <p class="subtitle">
+            Search a recipe and get its nutritional value!
+          </p>
+        </div>
+      </section>
 
-<body>
-  <div class="navbar-item has-dropdown is-hoverable">
-    <a class="navbar-link is-arrowless">
-      Link without arrow
-    </a>
-    <div class="navbar-dropdown">
-      <a class="navbar-item">
-        Overview
-      </a>
-      <a class="navbar-item">
-        Elements
-      </a>
-      <a class="navbar-item">
-        Components
-      </a>
-      <hr class="navbar-divider">
-      <div class="navbar-item">
+        <div class= "container search-area">
+            <div class="card column is-10 is-offset-1">
+                <header class= "card-header">
+                <p class= "card-header-title">
+                    Search for a meal to begin!
+                </p>
+                    
+                </header>
+                
+                <div class= "card-body">
+                    <div class="field has-addons">
+                        <div class="control is-expanded has-icons-left">
+                          <input class="input is-medium is-primary" type="text" placeholder="Type the meal here">
+                          <span class="icon is-left">
+                            <i class="fas fa-search" aria-hidden="true"></i>
+                          </span>
+                        </div>
+                        <div class= "control">
+                            <button class="button is-medium is-primary">
+                                Search
+                            </button>
+                        </div>
+                         
+                        </div>
+                      </div>
+                </div>
+        </div>
 
-      </div>
-    </div>
-  </div>
-  <section class="section">
-    <div class="container">
-      <h1 class="title">
-        Hello World
-      </h1>
-      <p class="subtitle">
-        My first website with <strong>Bulma</strong>!
-      </p>
-    </div>
-  </section>
-  <div>
-    <h2>Search Meal</h2>
-  </div>
-  <div class="container">
-    <div id="searchBarWrap">
-      <input class="input" type="text" placeholder="Search">
-    </div>
-    <div>
-      <button class="button">Submit</button>
-    </div>
-
-  </div>
-</body>
-
-</html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recipes by Nutrition</title>
-</head>
-
-<script src="https://code.jquery.com/jquery-3.5.1.js"
-integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-<script src="script.js"></script>
-<script src="apiCalls.js"></script>
-
+    <script src="https://kit.fontawesome.com/0b49d94544.js" crossorigin="anonymous"></script>
+  </body>
 </html>
