@@ -1,1 +1,4 @@
-//Javascript goes here
+//Global Varibles
+
+//test comment
+
