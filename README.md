@@ -1,5 +1,9 @@
 # Recipes by Nutrition Project
 
+Our group's task is to create a website app where the user can search for a desired meal into an input field, and from there our API will return a list of results of recipes that the user can click on to reveal its ingredients and nutritional values. Additionally, previous searched are saved in the users search history and users can mark recipes as favorites on a list. Finally, users can paste links for recipes that they've found to obtain their nutritional value.
+
+
+
 AS A health-conscious user interested in cooking,
 
 I WANT to see the nutritional value of recipes for meals I want to cook
