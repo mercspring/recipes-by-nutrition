@@ -46,9 +46,6 @@ function getRecipes() {
         method: "GET",
         url: spoontacularQueryURL
     }).then(function (response) {
-        console.log(response.extendedIngredients.length)
-        for (var i = 0; i < response.extendedIngredients.length; i++) {
-            console.log(response.extendedIngredients[i].original)
-        }
+        console.log(response)
     })
 }
