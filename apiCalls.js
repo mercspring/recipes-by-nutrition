@@ -1,6 +1,13 @@
+<<<<<<< HEAD
+
 // This function takes the index of the recipes array and appends the nutrution info to the corresponding recipe object
 function getNutritionInfo(recipeIndex) {
 
+=======
+// This function takes the index of the recipes array and appends the nutrution info to the corresponding recipe object
+function getNutritionInfo(recipeIndex) {
+
+>>>>>>> dev
     var recipe = recipes[recipeIndex];
 
     var edamamAppID = "b15b5751";
