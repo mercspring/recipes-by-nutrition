@@ -23,15 +23,20 @@ function getNutritionInfo(recipeIndex) {
 
 //Returns search results on click from the input field and feeds it into the getRecipes function
 
-$("#search").on("click", function(event){
-    event.preventDefault()
-    recipes = []
-    getRecipes($("#recipe-search").val())
-} )
+
+
+$("#search").on("click", function (event) {
+    event.preventDefault();
+    recipes = [];
+    if (!$("#recipe-search").val()) return; 
+    getRecipes($("#recipe-search").val());
+})
+
 
 //This function accepts a search term to be run through the spoonacular search api. It then populates the recipes array the resulting recipesInfo objects
 function getRecipes(searchTerm) {
 
+    console.log("running search")
     searchTerm = searchTerm.trim()
     var spoontacularAPIKey = "6f83f09047444b16b026a6461826992c";
     var spoontacularQueryURL = `https://api.spoonacular.com/recipes/search?apiKey=${spoontacularAPIKey}&query=${searchTerm}`
@@ -54,9 +59,9 @@ function getIngredients(recipeIndex) {
     var recipe = recipes[recipeIndex]
     var mealID = recipe.recipesInfo.id;
 
-    recipe.payload = {title: recipe.recipesInfo.title, yeild: recipe.recipesInfo.servings, ingr: []};
+    recipe.payload = { title: recipe.recipesInfo.title, yeild: recipe.recipesInfo.servings, ingr: [] };
     var spoontacularAPIKey = "067c508c55684529951d621c0c9b2b92";
-    
+
     var queryURL = `https://api.spoonacular.com/recipes/${mealID}/information?apiKey=${spoontacularAPIKey}&includeNutrition=false`
     $.ajax({
         method: "GET",
