@@ -49,3 +49,12 @@ function getRecipes() {
         console.log(response)
     })
 }
+
+
+function getIngredients(){
+
+    var searchTerm = "pasta"
+    var spoontacularAPIKey = "067c508c55684529951d621c0c9b2b92";
+
+    var queryURL = `https://api.spoonacular.com/recipes/637593/information?apiKey=6f83f09047444b16b026a6461826992c&includeNutrition=false`
+}
