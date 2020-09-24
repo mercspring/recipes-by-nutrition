@@ -58,7 +58,7 @@ function getRecipes(searchTerm) {
             recipes[i].recipesInfo = response.results[i];
             $("#search-results").attr("style", "display: block")
             var listEntry = $("<a>");
-            listEntry.attr("class", "panel-block");
+            listEntry.attr("class", "panel-block list-entry");
             listEntry.attr("data-index", i)
             var recipeDiv = $("<div>");
             recipeDiv.attr("class", "recipe-description");
