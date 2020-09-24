@@ -20,16 +20,17 @@
         </div>
       </section>
 
-        <div class= "container search-area">
-            <div class="card column is-10 is-offset-1">
-                <header class= "card-header">
+<!-- Search area for recipe: will be the only thing on opening page -->
+<div class= "container search-area">
+      <div class="card column is-10 is-offset-1">
+          <header class= "card-header">
                 <p class= "card-header-title">
                     Search for a meal to begin!
                 </p>
                     
                 </header>
                 
-                <div class= "card-body">
+            <div class= "card-content">
                     <div class="field has-addons">
                         <div class="control is-expanded has-icons-left">
                           <input class="input is-medium is-primary" id= "recipe-search" type="text" placeholder="Type the meal here">
@@ -43,13 +44,83 @@
                             </button>
                         </div>
                          
-                        </div>
-                      </div>
-                </div>
-        </div>
+              </div>
+          </div>
+      </div>
+</div>
 
-    <script src="https://kit.fontawesome.com/0b49d94544.js" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<!-- Recipe list: should pop up when search button is clicked and display recipes -->
+<div class= "columns">
+  <div class= "column is-4" id= "search-results">
+          <article class="panel is-primary">
+              <p class="panel-heading">
+                Search Results
+              </p>
+              <a class="panel-block">
+                  
+                  <div class= "recipe-description">
+                    <figure class="image is-96x96 recipe-img">
+                      <img src="https://bulma.io/images/placeholders/128x128.png">
+                    </figure>
+                    
+                      <p><b>Recipe Title</b></p>
+                      <p>
+                          Recipe info? gathered from website
+                      </p>
+                      
+                      
+                  </div>
+                  
+                </a>
+                <a class="panel-block">
+                  
+                  <div class= "recipe-description">
+                    <figure class="image is-96x96 recipe-img">
+                      <img src="https://bulma.io/images/placeholders/128x128.png">
+                    </figure>
+                    
+                      <p><b>Recipe Title</b></p>
+                      <p>
+                          Recipe info? gathered from website
+                      </p>
+                      
+                      
+                  </div>
+                  
+                </a>
+      
+          </article>
+  </div>
+
+<!-- Column displaying recipe information when clicked on -->
+  <div class= "column is-8" id= "recipe-info">
+    <div class = "card">
+      <div class= "card-header">
+        <h2 class= "card-header-title">Recipe Title</h2>
+      </div>
+
+      <div class= "card-content">
+        <div class= "columns">
+
+        <!-- The recipe will be put here -->
+          <div class= "column is-7" id= "recipe-inst">
+            RECIPE INFO GOES HERE
+          </div>
+
+          <!-- The nutrition facts will be put here -->
+          <div class= "column is-5" id= "recipe-nutrition">
+            NUTRITION INFO GOES HERE
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script src="https://kit.fontawesome.com/0b49d94544.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script src="script.js"></script>
 <script src="apiCalls.js"></script>
   </body>

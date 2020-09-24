@@ -1,3 +1,4 @@
+
 // This function takes the index of the recipes array and appends the nutrution info to the corresponding recipe object
 function getNutritionInfo(recipeIndex) {
 

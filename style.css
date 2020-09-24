@@ -1,7 +1,13 @@
-body{
+.hero {
+    margin-bottom: 20px;
+
+}
+
+body {
     text-align: left;
     color: black;
 }
+
 
 .is-hoverable{
     text-align: right;
@@ -28,4 +34,11 @@ body{
     padding-top: 50px;
 }
 
+.recipe-img {
+    float:right;
+}
+
+.recipe-description {
+    width: 100%;
+}
 
