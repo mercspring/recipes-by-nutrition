@@ -28,14 +28,17 @@ function getNutritionInfo(recipeIndex) {
 }
 
 //Returns search results on click from the input field and feeds it into the getRecipes function
-
-
-
 $("#search").on("click", function (event) {
     event.preventDefault();
     recipes = [];
     if (!$("#recipe-search").val()) return; 
     getRecipes($("#recipe-search").val());
+})
+
+//On click handler for the induvidual list entries this function grabs the data-index attribute and feeds it into the getIngredients function
+$(document).on("click", ".list-entry", function(event){
+    event.preventDefault();
+    getIngredients($(this).attr("data-index"));
 })
 
 
