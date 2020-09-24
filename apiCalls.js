@@ -2,7 +2,7 @@
 
 $("#search-results").attr("style", "display: none")
 
-$ ("#recipe-info").attr("style", "display: none")
+$("#recipe-info").attr("style", "display: none")
 
 // This function takes the index of the recipes array and appends the nutrution info to the corresponding recipe object
 function getNutritionInfo(recipeIndex) {
@@ -31,12 +31,12 @@ function getNutritionInfo(recipeIndex) {
 $("#search").on("click", function (event) {
     event.preventDefault();
     recipes = [];
-    if (!$("#recipe-search").val()) return; 
+    if (!$("#recipe-search").val()) return;
     getRecipes($("#recipe-search").val());
 })
 
 //On click handler for the induvidual list entries this function grabs the data-index attribute and feeds it into the getIngredients function
-$(document).on("click", ".list-entry", function(event){
+$(document).on("click", ".list-entry", function (event) {
     event.preventDefault();
     getIngredients($(this).attr("data-index"));
 })
@@ -93,8 +93,9 @@ function getRecipes(searchTerm) {
 //This function takes an index from the recipes array, querries the spoonacular api with the meal id (originaly obtained as part of the recipe) and adds the resulting ingredient info onto the induvidual recipe object in the form of a payload object
 function getIngredients(recipeIndex) {
 
-    var recipe = recipes[recipeIndex]
+    var recipe = recipes[recipeIndex];
     var mealID = recipe.recipesInfo.id;
+    recipe.recipesInfo.instructionsList = [];
 
     recipe.payload = { title: recipe.recipesInfo.title, yeild: recipe.recipesInfo.servings, ingr: [] };
     var spoontacularAPIKey = "067c508c55684529951d621c0c9b2b92";
@@ -104,6 +105,15 @@ function getIngredients(recipeIndex) {
         method: "GET",
         url: queryURL
     }).then(function (response) {
+        recipe.recipesInfo.instructionsBlob = response.instructions;
+        console.log(response)
+
+        for (var j = 0; j < response.analyzedInstructions.length; j++) {
+            for (var k = 0; k < response.analyzedInstructions[j].steps.length; k++) {
+                recipe.recipesInfo.instructionsList.push(response.analyzedInstructions[j].steps[k].step);
+            }
+        }
+
         for (var i = 0; i < response.extendedIngredients.length; i++) {
             recipe.payload.ingr.push(response.extendedIngredients[i].original)
 
