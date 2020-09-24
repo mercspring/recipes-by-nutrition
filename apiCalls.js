@@ -21,6 +21,13 @@ function getNutritionInfo(recipeIndex) {
     })
 }
 
+//Returns search results on click from the input field and feeds it into the getRecipes function
+
+$("#search").on("click", function(event){
+    event.preventDefault()
+    getRecipes($("#recipe-search").val())
+} )
+
 //This function accepts a search term to be run through the spoonacular search api. It then populates the recipes array the resulting recipesInfo objects
 function getRecipes(searchTerm) {
 
