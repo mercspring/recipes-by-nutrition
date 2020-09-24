@@ -25,6 +25,7 @@ function getNutritionInfo(recipeIndex) {
 
 $("#search").on("click", function(event){
     event.preventDefault()
+    recipes = []
     getRecipes($("#recipe-search").val())
 } )
 
