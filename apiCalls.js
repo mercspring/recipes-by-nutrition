@@ -1,3 +1,9 @@
+// Search results and recipe info divs start off as invisible
+
+$("#search-results").attr("style", "display: none")
+
+$ ("#recipe-info").attr("style", "display: none")
+
 // This function takes the index of the recipes array and appends the nutrution info to the corresponding recipe object
 function getNutritionInfo(recipeIndex) {
 
@@ -46,12 +52,40 @@ function getRecipes(searchTerm) {
         url: spoontacularQueryURL
     }).then(function (response) {
 
+        // Pushes the res
         for (var i = 0; i < response.results.length; i++) {
             recipes.push({});
             recipes[i].recipesInfo = response.results[i];
+            $("#search-results").attr("style", "display: block")
+            var listEntry = $("<a>");
+            listEntry.attr("class", "panel-block");
+            listEntry.attr("data-index", i)
+            var recipeDiv = $("<div>");
+            recipeDiv.attr("class", "recipe-description");
+            var recipeFig = $("<figure>");
+            recipeFig.attr("class", "image is-128x128 recipe-img");
+            var recipeImg = $("<img>");
+            recipeImg.attr("src", "https://spoonacular.com/recipeImages/" + recipes[i].recipesInfo.image);
+            var recipeTitle = $("<p>");
+            recipeTitle.text(recipes[i].recipesInfo.title)
+            recipeTitle.attr("style", "font-weight: bold");
+            var recipeTime = $("<p>");
+            recipeTime.text("Minutes to prepare: " + recipes[i].recipesInfo.readyInMinutes)
+            var recipeServings = $("<p>");
+            recipeServings.text("Serving size: " + recipes[i].recipesInfo.servings)
+            recipeFig.append(recipeImg)
+            recipeDiv.append(recipeFig)
+            recipeDiv.append(recipeTitle)
+            recipeDiv.append(recipeTime)
+            recipeDiv.append(recipeServings)
+            listEntry.append(recipeDiv)
+            $("#results-list").append(listEntry)
         }
     })
 }
+
+
+
 
 //This function takes an index from the recipes array, querries the spoonacular api with the meal id (originaly obtained as part of the recipe) and adds the resulting ingredient info onto the induvidual recipe object in the form of a payload object
 function getIngredients(recipeIndex) {
