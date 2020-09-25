@@ -11,19 +11,39 @@
   </head>
   <body>
 
-    <section class="hero is-primary">
+    <section class="hero">
         <div class="hero-body">
-          <p class="title">
-            Recipes By Nutrition 
-          </p>
-          <p class="subtitle">
-            Search a recipe and get its nutritional value!
-          </p>
-        </div>
-      </section>
+          <div class= "columns">
+              <div class= "column is-7">
+                    <p class="title">
+                     Recipes By Nutrition 
+                    </p>
+                   <p class="subtitle">
+                     Search a recipe and get its nutritional value!
+                   </p>
+          </div>
+            
+        <div class= "column is-5">
+          <div class="field has-addons" id= "topbar-search">
+            <div class="control is-expanded has-icons-left">
+                    <input class="input is-medium is-primary" id= "recipe-search-2" type="text" placeholder="Type the meal here">
+                    <span class="icon is-left">
+                      <i class="fas fa-search" aria-hidden="true"></i>
+                    </span>
+                </div>
+              <div class= "control">
+                  <button class="button is-medium is-primary" id="search-2">
+                          Search
+                  </button>
+             </div>
+          </div>
+      </div>
+     </div>
+   </div>     
+</section>
 
 <!-- Search area for recipe: will be the only thing on opening page -->
-<div class= "container search-area">
+<div class= "container" id= "search-area">
       <div class="card column is-10 is-offset-1">
           <header class= "card-header">
                 <p class= "card-header-title">
@@ -33,19 +53,18 @@
                 </header>
                 
             <div class= "card-content">
-                    <div class="field has-addons">
-                        <div class="control is-expanded has-icons-left">
+                <div class="field has-addons">
+                  <div class="control is-expanded has-icons-left">
                           <input class="input is-medium is-primary" id= "recipe-search" type="text" placeholder="Type the meal here">
                           <span class="icon is-left">
                             <i class="fas fa-search" aria-hidden="true"></i>
                           </span>
-                        </div>
-                        <div class= "control">
-                            <button class="button is-medium is-primary" id="search">
+                      </div>
+                    <div class= "control">
+                        <button class="button is-medium is-primary" id="search">
                                 Search
-                            </button>
-                        </div>
-                         
+                        </button>
+                   </div>
               </div>
           </div>
       </div>
@@ -65,7 +84,7 @@
   <div class= "column is-8" id= "recipe-info">
     <div class = "card">
       <div class= "card-header">
-        <h2 class= "card-header-title">Recipe Title</h2>
+        <h2 class= "card-header-title" id= "recipe-title"></h2>
       </div>
 
       <div class= "card-content">
@@ -73,12 +92,10 @@
 
         <!-- The recipe will be put here -->
           <div class= "column is-7" id= "recipe-inst">
-            RECIPE INFO GOES HERE
           </div>
 
           <!-- The nutrition facts will be put here -->
           <div class= "column is-5" id= "recipe-nutrition">
-            NUTRITION INFO GOES HERE
           </div>
 
 

@@ -1,8 +1,8 @@
 // Search results and recipe info divs start off as invisible
 
-// $("#search-results").attr("style", "display: none")
+$("#search-results").attr("style", "display: none")
 
-// $("#recipe-info").attr("style", "display: none")
+$("#recipe-info").attr("style", "display: none")
 
 function displayNutritionInfo(recipeIndex) {
 
@@ -44,6 +44,8 @@ function displayNutritionInfo(recipeIndex) {
 
     });
 }
+$("#topbar-search").attr("style", "opacity: 0.0")
+
 // This function takes the index of the recipes array and appends the nutrution info to the corresponding recipe object
 function getNutritionInfo(recipeIndex) {
 
@@ -80,9 +82,17 @@ $("#search").on("click", function (event) {
     getRecipes($("#recipe-search").val());
 })
 
+$("#search-2").on("click", function (event) {
+    event.preventDefault();
+    recipes = [];
+    if (!$("#recipe-search-2").val()) return;
+    getRecipes($("#recipe-search-2").val());
+})
+
 //On click handler for the induvidual list entries this function grabs the data-index attribute and feeds it into the getIngredients function
 $(document).on("click", ".list-entry", function (event) {
     event.preventDefault();
+    $("#recipe-info").attr("style", "display: block")
     getIngredients($(this).attr("data-index"));
 })
 
@@ -94,6 +104,10 @@ function getRecipes(searchTerm) {
     searchTerm = searchTerm.trim()
     var spoontacularAPIKey = "6f83f09047444b16b026a6461826992c";
     var spoontacularQueryURL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${spoontacularAPIKey}&query=${searchTerm}&instructionsRequired=true&addRecipeInformation=true`
+    $("#search-area").fadeTo("medium", "0.0")
+    $("#search-area").attr("style", "display: none");
+    $("#topbar-search").fadeTo("medium", "1.0");
+    $("#results-list").empty();
 
     $.ajax({
         method: "GET",
@@ -148,6 +162,8 @@ function getIngredients(recipeIndex) {
         ingr: [] };
     var spoontacularAPIKey = "6f83f09047444b16b026a6461826992c";
 
+   
+
     var queryURL = `https://api.spoonacular.com/recipes/${mealID}/information?apiKey=${spoontacularAPIKey}&includeNutrition=false`
     $.ajax({
         method: "GET",
@@ -156,16 +172,47 @@ function getIngredients(recipeIndex) {
         recipe.recipesInfo.instructionsBlob = response.instructions;
         console.log(response)
 
+
+
         for (var j = 0; j < response.analyzedInstructions.length; j++) {
             for (var k = 0; k < response.analyzedInstructions[j].steps.length; k++) {
                 recipe.recipesInfo.instructionsList.push(response.analyzedInstructions[j].steps[k].step);
+                var instructions = $("<p>");
+                instructions.html(recipe.recipesInfo.instructionsList);
+                
+
             }
         }
 
+       
+
+        var ingredients = $("<ol>");
+
         for (var i = 0; i < response.extendedIngredients.length; i++) {
-            recipe.payload.ingr.push(response.extendedIngredients[i].original)
+            recipe.payload.ingr.push(response.extendedIngredients[i].original);
+            $("#recipe-title").text(recipe.payload.title);
+            var ingredientIndiv = $("<li>");
+            ingredientIndiv.text(recipe.payload.ingr[i]);
+            ingredients.append(ingredientIndiv)
+            var recipeImg = $("<img>")
+            recipeImg.attr("src", recipe.recipesInfo.image)
 
         }
+
+        $("#recipe-inst").empty()
+
+        var instructionsTitle = $("<h3>");
+        instructionsTitle.text("Instructions: ")
+        var ingredientsTitle = $("<h3>");
+        ingredientsTitle.text("Ingredients: ")
+
+        $("#recipe-inst").append(recipeImg)
+        $("#recipe-inst").append(ingredientsTitle)
+        $("#recipe-inst").append(ingredients)
+        $("#recipe-inst").append(instructionsTitle)
+        $("#recipe-inst").append(instructions);
+
+    
     getNutritionInfo(recipeIndex);
     })
 }
