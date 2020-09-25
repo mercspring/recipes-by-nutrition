@@ -63,6 +63,10 @@ function getRecipes(searchTerm) {
     $("#search-area").attr("style", "display: none");
     $("#topbar-search").fadeTo("medium", "1.0");
     $("#results-list").empty();
+    var listHeading= $("<p>");
+    listHeading.attr("class", "panel-heading");
+    listHeading.text("Search Results");
+    $("#results-list").append(listHeading)
 
     $.ajax({
         method: "GET",
@@ -91,8 +95,8 @@ function getRecipes(searchTerm) {
             var recipeServings = $("<p>");
             recipeServings.text("Serving size: " + recipes[i].recipesInfo.servings)
             recipeFig.append(recipeImg)
-            recipeDiv.append(recipeFig)
             recipeDiv.append(recipeTitle)
+            recipeDiv.append(recipeFig)
             recipeDiv.append(recipeTime)
             recipeDiv.append(recipeServings)
             listEntry.append(recipeDiv)
