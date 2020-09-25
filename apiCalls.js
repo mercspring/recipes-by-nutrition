@@ -4,6 +4,8 @@ $("#search-results").attr("style", "display: none")
 
 $("#recipe-info").attr("style", "display: none")
 
+$("#topbar-search").attr("style", "opacity: 0.0")
+
 // This function takes the index of the recipes array and appends the nutrution info to the corresponding recipe object
 function getNutritionInfo(recipeIndex) {
 
@@ -35,6 +37,13 @@ $("#search").on("click", function (event) {
     getRecipes($("#recipe-search").val());
 })
 
+$("#search-2").on("click", function (event) {
+    event.preventDefault();
+    recipes = [];
+    if (!$("#recipe-search-2").val()) return;
+    getRecipes($("#recipe-search-2").val());
+})
+
 //On click handler for the induvidual list entries this function grabs the data-index attribute and feeds it into the getIngredients function
 $(document).on("click", ".list-entry", function (event) {
     event.preventDefault();
@@ -50,6 +59,10 @@ function getRecipes(searchTerm) {
     searchTerm = searchTerm.trim()
     var spoontacularAPIKey = "6f83f09047444b16b026a6461826992c";
     var spoontacularQueryURL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${spoontacularAPIKey}&query=${searchTerm}&instructionsRequired=true&addRecipeInformation=true`
+    $("#search-area").fadeTo("medium", "0.0")
+    $("#search-area").attr("style", "display: none");
+    $("#topbar-search").fadeTo("medium", "1.0");
+    $("#results-list").empty();
 
     $.ajax({
         method: "GET",
@@ -134,7 +147,7 @@ function getIngredients(recipeIndex) {
             ingredientIndiv.text(recipe.payload.ingr[i]);
             ingredients.append(ingredientIndiv)
             var recipeImg = $("<img>")
-            recipeImg.attr("src", "https://spoonacular.com/recipeImages/" + recipe.recipesInfo.image)
+            recipeImg.attr("src", recipe.recipesInfo.image)
 
         }
 
