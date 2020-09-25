@@ -38,6 +38,7 @@ $("#search").on("click", function (event) {
 //On click handler for the induvidual list entries this function grabs the data-index attribute and feeds it into the getIngredients function
 $(document).on("click", ".list-entry", function (event) {
     event.preventDefault();
+    $("#recipe-info").attr("style", "display: block")
     getIngredients($(this).attr("data-index"));
 })
 
@@ -108,15 +109,44 @@ function getIngredients(recipeIndex) {
         recipe.recipesInfo.instructionsBlob = response.instructions;
         console.log(response)
 
+
         for (var j = 0; j < response.analyzedInstructions.length; j++) {
             for (var k = 0; k < response.analyzedInstructions[j].steps.length; k++) {
                 recipe.recipesInfo.instructionsList.push(response.analyzedInstructions[j].steps[k].step);
+                var instructions = $("<p>");
+                instructions.html(recipe.recipesInfo.instructionsList);
+                
+
             }
         }
 
+       
+
+        var ingredients = $("<ol>");
+
         for (var i = 0; i < response.extendedIngredients.length; i++) {
-            recipe.payload.ingr.push(response.extendedIngredients[i].original)
+            recipe.payload.ingr.push(response.extendedIngredients[i].original);
+            $("#recipe-title").text(recipe.payload.title);
+            var ingredientIndiv = $("<li>");
+            ingredientIndiv.text(recipe.payload.ingr[i]);
+            ingredients.append(ingredientIndiv)
+            var recipeImg = $("<img>")
+            recipeImg.attr("src", "https://spoonacular.com/recipeImages/" + recipe.recipesInfo.image)
 
         }
+
+        var instructionsTitle = $("<h3>");
+        instructionsTitle.text("Instructions: ")
+        var ingredientsTitle = $("<h3>");
+        ingredientsTitle.text("Ingredients: ")
+
+
+        $("#recipe-inst").append(recipeImg)
+        $("#recipe-inst").append(ingredientsTitle)
+        $("#recipe-inst").append(ingredients)
+        $("#recipe-inst").append(instructionsTitle)
+        $("#recipe-inst").append(instructions);
+
+    
     })
 }
