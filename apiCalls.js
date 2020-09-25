@@ -48,7 +48,7 @@ function getRecipes(searchTerm) {
     console.log("running search")
     searchTerm = searchTerm.trim()
     var spoontacularAPIKey = "6f83f09047444b16b026a6461826992c";
-    var spoontacularQueryURL = `https://api.spoonacular.com/recipes/search?apiKey=${spoontacularAPIKey}&query=${searchTerm}`
+    var spoontacularQueryURL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${spoontacularAPIKey}&query=${searchTerm}&instructionsRequired=true&addRecipeInformation=true`
 
     $.ajax({
         method: "GET",
@@ -68,7 +68,7 @@ function getRecipes(searchTerm) {
             var recipeFig = $("<figure>");
             recipeFig.attr("class", "image is-128x128 recipe-img");
             var recipeImg = $("<img>");
-            recipeImg.attr("src", "https://spoonacular.com/recipeImages/" + recipes[i].recipesInfo.image);
+            recipeImg.attr("src", recipes[i].recipesInfo.image);
             var recipeTitle = $("<p>");
             recipeTitle.text(recipes[i].recipesInfo.title)
             recipeTitle.attr("style", "font-weight: bold");
