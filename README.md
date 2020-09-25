@@ -51,7 +51,9 @@ Materialize
 
 Foundation
 
-## Layout
 
-![website layout](https://raw.githubusercontent.com/mercspring/recipes-by-nutrition/dev/layout.png)
+## Nutrition Label
+
+Below is a link to the Nutritionix's GitHub account which provided us with the nutrition label we used within our app.
+Nutritionix (https://github.com/nutritionix/nutrition-label)
 
