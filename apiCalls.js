@@ -1,17 +1,60 @@
 // Search results and recipe info divs start off as invisible
 
-$("#search-results").attr("style", "display: none")
+// $("#search-results").attr("style", "display: none")
 
-$("#recipe-info").attr("style", "display: none")
+// $("#recipe-info").attr("style", "display: none")
 
-// This function takes the index of the recipes array and appends the nutrution info to the corresponding recipe object
-function getNutritionInfo(recipeIndex) {
+function displayNutritionInfo(recipeIndex) {
 
     var recipe = recipes[recipeIndex];
 
-    var edamamAppID = "b15b5751";
-    var edamamAppKey = "83d297e6ece544701047f8a4c809793f";
-    var edamamQueryURL = `https://api.edamam.com/api/nutrition-details?app_id=${edamamAppID}&app_key=${edamamAppKey}`
+    $("#recipe-nutrition").nutritionLabel({
+        showDailyTotalFat: false,
+        showDailySodium: false,
+        showDailyFibers: false,
+        showDailyAddedSugars: false,
+        showDailyCalcium: false,
+        showDailyIron: false,
+        showCaffeine: false,
+        valueServingUnitQuantity : recipe.recipesInfo.servings,
+        showIngredients : false,
+
+        showServingUnitQuantity: false,
+        itemName: recipe.recipesInfo.title,
+
+        showPolyFat: false,
+        showMonoFat: false,
+
+        valueCalories: recipe.totalNutrientsKCal.ENERC_KCAL.quantity,
+        valueFatCalories: recipe.totalNutrientsKCal.FAT_KCAL.quantity,
+        valueTotalFat: recipe.totalNutrients.FAT.quantity,
+        valueSatFat: recipe.totalNutrients.FASAT.quantity,
+        valueTransFat: recipe.totalNutrients.FATRN.quantity,
+        valueCholesterol: recipe.totalNutrients.CHOLE.quantity,
+        valueSodium: recipe.totalNutrients.NA.quantity,
+        valueTotalCarb: recipe.totalNutrients.CHOCDF.quantity,
+        valueFibers: recipe.totalNutrients.FIBTG.quantity,
+        valueSugars: recipe.totalNutrients.SUGAR.quantity ,
+        valueProteins: recipe.totalNutrients.PROCNT.quantity,
+        valueVitaminD: recipe.totalNutrients.VITD.quantity,
+        valuePotassium_2018: recipe.totalNutrients.K.quantity,
+        valueCalcium: recipe.totalNutrients.CA.quantity,
+        valueIron: recipe.totalNutrients.FE.quantity,
+        showLegacyVersion: false
+
+    });
+}
+// This function takes the index of the recipes array and appends the nutrution info to the corresponding recipe object
+function getNutritionInfo(recipeIndex) {
+
+    $("#recipe-nutrition").empty();
+    var recipe = recipes[recipeIndex];
+    console.log(recipeIndex)
+    console.log(recipe)
+
+    var edamamAppID = "6380c8a2";
+    var edamamAppKey = "ee767896384b04d3d0d1050f9ea6b107";
+    var edamamQueryURL = `https://api.edamam.com/api/nutrition-details?app_id=${edamamAppID}&app_key=${edamamAppKey}&force`
 
     // var payload = { title: recipe.title, yield: recipe.servings, ingr: recipe.ingredients }
 
@@ -19,11 +62,13 @@ function getNutritionInfo(recipeIndex) {
         method: "POST",
         url: edamamQueryURL,
         headers: { "Content-Type": "application/json" },
-        data: JSON.stringify(recipe.payload)
+        data: JSON.stringify(recipe.payload),
+        error: function(){$("#recipe-nutrition").append("<p> Not able to process nutritional info for this recipe.</p>")}
     }).then(function (response) {
         recipe.totalDaily = response.totalDaily;
         recipe.totalNutrients = response.totalNutrients;
         recipe.totalNutrientsKCal = response.totalNutrientsKCal;
+        displayNutritionInfo(recipeIndex)
     })
 }
 
@@ -97,8 +142,11 @@ function getIngredients(recipeIndex) {
     var mealID = recipe.recipesInfo.id;
     recipe.recipesInfo.instructionsList = [];
 
-    recipe.payload = { title: recipe.recipesInfo.title, yeild: recipe.recipesInfo.servings, ingr: [] };
-    var spoontacularAPIKey = "067c508c55684529951d621c0c9b2b92";
+    recipe.payload = { title: recipe.recipesInfo.title,
+        yeild: recipe.recipesInfo.servings,
+        url: recipe.recipesInfo.sourceUrl,
+        ingr: [] };
+    var spoontacularAPIKey = "6f83f09047444b16b026a6461826992c";
 
     var queryURL = `https://api.spoonacular.com/recipes/${mealID}/information?apiKey=${spoontacularAPIKey}&includeNutrition=false`
     $.ajax({
@@ -118,5 +166,6 @@ function getIngredients(recipeIndex) {
             recipe.payload.ingr.push(response.extendedIngredients[i].original)
 
         }
+    getNutritionInfo(recipeIndex);
     })
 }
