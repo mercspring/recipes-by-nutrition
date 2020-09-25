@@ -101,6 +101,8 @@ function getIngredients(recipeIndex) {
     recipe.payload = { title: recipe.recipesInfo.title, yeild: recipe.recipesInfo.servings, ingr: [] };
     var spoontacularAPIKey = "067c508c55684529951d621c0c9b2b92";
 
+   
+
     var queryURL = `https://api.spoonacular.com/recipes/${mealID}/information?apiKey=${spoontacularAPIKey}&includeNutrition=false`
     $.ajax({
         method: "GET",
@@ -108,6 +110,7 @@ function getIngredients(recipeIndex) {
     }).then(function (response) {
         recipe.recipesInfo.instructionsBlob = response.instructions;
         console.log(response)
+
 
 
         for (var j = 0; j < response.analyzedInstructions.length; j++) {
@@ -135,11 +138,12 @@ function getIngredients(recipeIndex) {
 
         }
 
+        $("#recipe-inst").empty()
+
         var instructionsTitle = $("<h3>");
         instructionsTitle.text("Instructions: ")
         var ingredientsTitle = $("<h3>");
         ingredientsTitle.text("Ingredients: ")
-
 
         $("#recipe-inst").append(recipeImg)
         $("#recipe-inst").append(ingredientsTitle)
