@@ -1,0 +1,45 @@
+.hero {
+    margin-bottom: 20px;
+    background-color: lightgreen;
+
+}
+
+body {
+    text-align: left;
+    color: black;
+}
+
+
+.is-hoverable{
+    text-align: right;
+    position: absolute;
+    top: 50px;
+    right: 0px;
+    background-color: lightgreen;
+}
+
+#searchBarWrap{ 
+    text-align: center;
+    margin-top: 80px;
+    margin-left: 280px;
+    width: 50%;
+    
+}
+
+.section{
+    background-color: lightgreen;
+    
+}
+
+.search-area {
+    padding-top: 50px;
+}
+
+.recipe-img {
+    float:right;
+}
+
+.recipe-description {
+    width: 100%;
+}
+

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Recipes By Nutrition</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+    <link rel="stylesheet" href="nutrition-label/css/nutritionLabel-min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Archivo+Black" />
+  </head>
+  <body>
+
+    <section class="hero">
+        <div class="hero-body">
+          <div class= "columns">
+              <div class= "column is-7">
+                    <p class="title">
+                     Recipes By Nutrition 
+                    </p>
+                   <p class="subtitle">
+                     Search a recipe and get its nutritional value!
+                   </p>
+          </div>
+            
+        <div class= "column is-5">
+          <div class="field has-addons" id= "topbar-search">
+            <div class="control is-expanded has-icons-left">
+                    <input class="input is-medium is-primary" id= "recipe-search-2" type="text" placeholder="Type the meal here">
+                    <span class="icon is-left">
+                      <i class="fas fa-search" aria-hidden="true"></i>
+                    </span>
+                </div>
+              <div class= "control">
+                  <button class="button is-medium is-primary" id="search-2">
+                          Search
+                  </button>
+             </div>
+          </div>
+      </div>
+     </div>
+   </div>     
+</section>
+
+<!-- Search area for recipe: will be the only thing on opening page -->
+<div class= "container" id= "search-area">
+      <div class="card column is-10 is-offset-1">
+          <header class= "card-header">
+                <p class= "card-header-title">
+                    Search for a meal to begin!
+                </p>
+                    
+                </header>
+                
+            <div class= "card-content">
+                <div class="field has-addons">
+                  <div class="control is-expanded has-icons-left">
+                          <input class="input is-medium is-primary" id= "recipe-search" type="text" placeholder="Type the meal here">
+                          <span class="icon is-left">
+                            <i class="fas fa-search" aria-hidden="true"></i>
+                          </span>
+                      </div>
+                    <div class= "control">
+                        <button class="button is-medium is-primary" id="search">
+                                Search
+                        </button>
+                   </div>
+              </div>
+          </div>
+      </div>
+</div>
+
+<!-- Recipe list: should pop up when search button is clicked and display recipes -->
+<div class= "columns">
+  <div class= "column is-4" id= "search-results">
+          <article class="panel is-primary" id= "results-list">
+              <p class="panel-heading">
+                Search Results
+              </p>
+          </article>
+  </div>
+
+<!-- Column displaying recipe information when clicked on -->
+  <div class= "column is-8" id= "recipe-info">
+    <div class = "card">
+      <div class= "card-header">
+        <h2 class= "card-header-title" id= "recipe-title"></h2>
+      </div>
+
+      <div class= "card-content">
+        <div class= "columns">
+
+        <!-- The recipe will be put here -->
+          <div class= "column is-7" id= "recipe-inst">
+          </div>
+
+          <!-- The nutrition facts will be put here -->
+          <div class= "column is-5" id= "recipe-nutrition">
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script src="https://kit.fontawesome.com/0b49d94544.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script src="nutrition-label/js/nutritionLabel-min.js"></script>
+<script src="script.js"></script>
+<script src="apiCalls.js"></script>
+  </body>
+</html>
+
