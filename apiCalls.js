@@ -4,11 +4,18 @@ $("#search-results").attr("style", "display: none")
 
 $("#recipe-info").attr("style", "display: none")
 
+
 function displayNutritionInfo(recipeIndex) {
 
-    var recipe = recipes[recipeIndex];
+    nutritionDiv.empty();
 
-    $("#recipe-nutrition").nutritionLabel({
+    var recipe = recipes[recipeIndex];
+    var nutritionLabel = $("<div>");
+
+    nutritionLabel.attr("id", "nutrition-label");
+    nutritionDiv.append(nutritionLabel);
+
+    nutritionLabel.nutritionLabel({
         showDailyTotalFat: false,
         showDailySodium: false,
         showDailyFibers: false,
@@ -43,13 +50,14 @@ function displayNutritionInfo(recipeIndex) {
         showLegacyVersion: false
 
     });
+
 }
 $("#topbar-search").attr("style", "opacity: 0.0")
 
 // This function takes the index of the recipes array and appends the nutrution info to the corresponding recipe object
 function getNutritionInfo(recipeIndex) {
 
-    $("#recipe-nutrition").empty();
+    // $("#recipe-nutrition").empty();
     var recipe = recipes[recipeIndex];
     console.log(recipeIndex)
     console.log(recipe)
@@ -65,7 +73,7 @@ function getNutritionInfo(recipeIndex) {
         url: edamamQueryURL,
         headers: { "Content-Type": "application/json" },
         data: JSON.stringify(recipe.payload),
-        error: function(){$("#recipe-nutrition").append("<p> Not able to process nutritional info for this recipe.</p>")}
+        error: function(){nutritionDiv.empty(); nutritionDiv.append("<p> Not able to process nutritional info for this recipe.</p>")}
     }).then(function (response) {
         recipe.totalDaily = response.totalDaily;
         recipe.totalNutrients = response.totalNutrients;
