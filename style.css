@@ -42,11 +42,22 @@ body {
     margin-top: 80px;
     margin-left: 280px;
     width: 50%;
-    
+}
+
+#search-results {
+    display: none;
 }
 
 #recipe-info {
     font-family: 'Mandali', sans-serif;
+}
+
+#topbar-search {
+    opacity: 0.0;
+}
+
+#favorites {
+    opacity: 0.0;
 }
 
 .section{
@@ -90,7 +101,9 @@ body {
 
 #mobile-buttons {
     padding-top: 10px;
-    margin: 0 auto; }
+    margin: 0 auto; 
+    display: none;
+}
 
 #add-favorite:hover::after{
     content:" ~ Add to Favorites";
@@ -104,6 +117,10 @@ body {
 }
 
 .desktop-hide {
+    display: none;
+}
+
+.mobile-show {
     display: none;
 }
 
