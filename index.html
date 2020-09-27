@@ -1,32 +1,31 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Recipes By Nutrition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Calistoga&family=Mandali&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+    <link rel="stylesheet" href="nutrition-label/nutritionLabel-stable-ver-9.0.10.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Archivo+Black" />
+  </head>
+  <body>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Recipes By Nutrition</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
-  <link rel="stylesheet" href="nutrition-label/nutritionLabel-stable-ver-9.0.10.css">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Archivo+Black" />
-</head>
-
-<body>
-
-  <section class="hero">
-    <div class="hero-body">
-      <div class="columns">
-        <div class="column is-7">
-          <p class="title">
-            Recipes By Nutrition
-          </p>
-          <p class="subtitle">
-            Search a recipe and get its nutritional value!
-          </p>
-        </div>
-
-        <div class="column is-5">
-          <div class="field has-addons" id="topbar-search">
+    <section class="hero">
+        <div class="hero-body">
+          <div class= "columns">
+              <div class= "column is-7">
+                    <p class="title">
+                     Recipes By Nutrition 
+                    </p>
+                   <p class="subtitle">
+                     Search a recipe and get its nutritional value!
+                   </p>
+          </div>
+            
+        <div class= "column is-5">
+          <div class="field has-addons" id= "topbar-search">
             <div class="control is-expanded has-icons-left">
               <input class="input is-medium is-primary" id="recipe-search-2" type="text"
                 placeholder="Type the meal here">
@@ -43,47 +42,51 @@
           <p id="favorites"> Or <span class="favorites-link">view your saved favorites</span></p>
         </div>
       </div>
-    </div>
-  </section>
+     </div>
+   </div>     
+</section>
 
-  <!-- Search area for recipe: will be the only thing on opening page -->
-  <div class="container" id="search-area">
-    <div class="card column is-10 is-offset-1">
-      <header class="card-header">
-        <p class="card-header-title">
-          Search for a meal to begin!
-        </p>
-        <p class="favorites"> Or <span class="favorites-link">view your saved favorites</span></p>
-
-      </header>
-
-      <div class="card-content">
-        <div class="field has-addons">
-          <div class="control is-expanded has-icons-left">
-            <input class="input is-medium is-primary" id="recipe-search" type="text" placeholder="Type the meal here">
-            <span class="icon is-left">
-              <i class="fas fa-search" aria-hidden="true"></i>
-            </span>
-          </div>
-          <div class="control">
-            <button class="button is-medium is-primary" id="search">
-              Search
-            </button>
+<!-- Search area for recipe: will be the only thing on opening page -->
+<div class= "container" id= "search-area">
+      <div class="card column is-10 is-offset-1">
+                <p class= "card-header-title">
+                    Search for a meal to begin!
+                </p>
+                    
+            
+                
+            <div class= "card-content">
+                <div class="field has-addons">
+                  <div class="control is-expanded has-icons-left">
+                          <input class="input is-medium is-primary" id= "recipe-search" type="text" placeholder="Type the meal here">
+                          <span class="icon is-left">
+                            <i class="fas fa-search" aria-hidden="true"></i>
+                          </span>
+                      </div>
+                    <div class= "control">
+                        <button class="button is-medium is-primary" id="search">
+                                Search
+                        </button>
+                   </div>
+              </div>
           </div>
         </div>
       </div>
-    </div>
+</div>
+
+<!-- Recipe list: should pop up when search button is clicked and display recipes -->
+<div class= "columns">
+  <div class= "column is-4" id= "search-results">
+          <article class="panel is-primary" id= "results-list">
+          </article>
   </div>
 
-  <!-- Recipe list: should pop up when search button is clicked and display recipes -->
-  <div class="columns">
-    <div class="column is-4" id="search-results">
-      <article class="panel is-primary" id="results-list">
-        <p class="panel-heading">
-          Search Results
-        </p>
-      </article>
-    </div>
+<!-- Column displaying recipe information when clicked on -->
+  <div class= "column is-8" id= "recipe-info">
+    <div class = "card panel is-primary">
+      <div class= "panel-heading">
+        <h2 class= "panel-title" id= "recipe-title"></h2>
+      </div>
 
     <!-- Column displaying recipe information when clicked on -->
     <div class="column is-8" id="recipe-info">
