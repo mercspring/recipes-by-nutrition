@@ -284,7 +284,7 @@ function getIngredients(recipeIndex) {
         url: recipe.recipesInfo.sourceUrl,
         ingr: []
     };
-    var spoontacularAPIKey = "6f83f09047444b16b026a6461826992c";
+    var spoontacularAPIKey = "67ecadda6de74697a2dbc8590ce5c42c";
 
 
 

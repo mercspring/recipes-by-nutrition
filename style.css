@@ -84,17 +84,22 @@ body {
 }
 
 #add-favorite{
-    font-size: 14pt;
+    /* font-size: 14pt; */
     cursor: pointer;
 }
 
 #mobile-buttons {
     padding-top: 10px;
-    margin: 0 auto;
+    margin: 0 auto; }
+
+#add-favorite:hover::after{
+    content:" ~ Add to Favorites";
+    opacity: 50%;
+    font-size: 13pt;
 }
 
 .favorites-link{
-    color: purple;
+    color: rgb(76, 76, 235);
     cursor: pointer;
 }
 
