@@ -43,3 +43,12 @@ body {
     width: 100%;
 }
 
+#add-favorite{
+    font-size: 14pt;
+    cursor: pointer;
+}
+
+.favorites-link{
+    color: purple;
+    cursor: pointer;
+}
