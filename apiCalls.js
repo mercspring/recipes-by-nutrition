@@ -15,42 +15,40 @@ function displayNutritionInfo(recipeIndex) {
     nutritionLabel.attr("id", "nutrition-label");
     nutritionDiv.append(nutritionLabel);
 
-    nutritionLabel.nutritionLabel({
-        showDailyTotalFat: false,
-        showDailySodium: false,
-        showDailyFibers: false,
-        showDailyAddedSugars: false,
-        showDailyCalcium: false,
-        showDailyIron: false,
-        showCaffeine: false,
-        valueServingUnitQuantity : recipe.recipesInfo.servings,
-        showIngredients : false,
+    nutritionLabel.nutritionLabel(new NutritionObject(recipe));
 
-        showServingUnitQuantity: false,
-        itemName: recipe.recipesInfo.title,
+}
 
-        showPolyFat: false,
-        showMonoFat: false,
+function NutritionObject(recipe) {
+    this.showDailyTotalFat = false;
+    this.showDailyFibers = false;
+    this.showAddedSugars = false;
+    this.showCaffeine = false;
+    if (typeof recipe.recipesInfo.servings != 'undefined') this.valueServingUnitQuantity = recipe.recipesInfo.servings;
+    this.showIngredients = false;
 
-        valueCalories: recipe.totalNutrientsKCal.ENERC_KCAL.quantity,
-        valueFatCalories: recipe.totalNutrientsKCal.FAT_KCAL.quantity,
-        valueTotalFat: recipe.totalNutrients.FAT.quantity,
-        valueSatFat: recipe.totalNutrients.FASAT.quantity,
-        valueTransFat: recipe.totalNutrients.FATRN.quantity,
-        valueCholesterol: recipe.totalNutrients.CHOLE.quantity,
-        valueSodium: recipe.totalNutrients.NA.quantity,
-        valueTotalCarb: recipe.totalNutrients.CHOCDF.quantity,
-        valueFibers: recipe.totalNutrients.FIBTG.quantity,
-        valueSugars: recipe.totalNutrients.SUGAR.quantity ,
-        valueProteins: recipe.totalNutrients.PROCNT.quantity,
-        valueVitaminD: recipe.totalNutrients.VITD.quantity,
-        valuePotassium_2018: recipe.totalNutrients.K.quantity,
-        valueCalcium: recipe.totalNutrients.CA.quantity,
-        valueIron: recipe.totalNutrients.FE.quantity,
-        showLegacyVersion: false
+    this.showServingUnitQuantity = false;
+    if (typeof recipe.recipesInfo.title != 'undefined') this.itemName = recipe.recipesInfo.title;
 
-    });
 
+    if (typeof recipe.totalNutrientsKCal.ENERC_KCAL != 'undefined') this.valueCalories = recipe.totalNutrientsKCal.ENERC_KCAL.quantity;
+    if (typeof recipe.totalNutrientsKCal.FAT_KCAL != 'undefined') this.valueFatCalories = recipe.totalNutrientsKCal.FAT_KCAL.quantity;
+    if (typeof recipe.totalNutrients.FAT != 'undefined') this.valueTotalFat = recipe.totalNutrients.FAT.quantity;
+    if (typeof recipe.totalNutrients.FASAT != 'undefined') this.valueSatFat = recipe.totalNutrients.FASAT.quantity;
+    if (typeof recipe.totalNutrients.FATRN != 'undefined') this.valueTransFat = recipe.totalNutrients.FATRN.quantity;
+    if (typeof recipe.totalNutrients.CHOLE != 'undefined') this.valueCholesterol = recipe.totalNutrients.CHOLE.quantity;
+    if (typeof recipe.totalNutrients.NA != 'undefined') this.valueSodium = recipe.totalNutrients.NA.quantity;
+    if (typeof recipe.totalNutrients.CHOCDF != 'undefined') this.valueTotalCarb = recipe.totalNutrients.CHOCDF.quantity;
+    if (typeof recipe.totalNutrients.FIBTG != 'undefined') this.valueFibers = recipe.totalNutrients.FIBTG.quantity;
+    if (typeof recipe.totalNutrients.SUGAR != 'undefined') this.valueSugars = recipe.totalNutrients.SUGAR.quantity;
+    if (typeof recipe.totalNutrients.PROCNT != 'undefined') this.valueProteins = recipe.totalNutrients.PROCNT.quantity;
+
+    if (typeof recipe.totalNutrients.VITD != 'undefined') this.valueVitaminD = recipe.totalDaily.VITD.quantity;
+    if (typeof recipe.totalNutrients.VITC != 'undefined') this.valueVitaminC = recipe.totalDaily.VITC.quantity;
+    if (typeof recipe.totalNutrients.K != 'undefined') this.valuePotassium_2018 = recipe.totalDaily.K.quantity;
+    if (typeof recipe.totalNutrients.CA != 'undefined') this.valueCalcium = recipe.totalDaily.CA.quantity;
+    if (typeof recipe.totalNutrients.FE != 'undefined') this.valueIron = recipe.totalDaily.FE.quantity;
+    this.showLegacyVersion = false;
 }
 $("#topbar-search").attr("style", "opacity: 0.0")
 
@@ -73,7 +71,7 @@ function getNutritionInfo(recipeIndex) {
         url: edamamQueryURL,
         headers: { "Content-Type": "application/json" },
         data: JSON.stringify(recipe.payload),
-        error: function(){nutritionDiv.empty(); nutritionDiv.append("<p> Not able to process nutritional info for this recipe.</p>")}
+        error: function () { nutritionDiv.empty(); nutritionDiv.append("<p> Not able to process nutritional info for this recipe.</p>") }
     }).then(function (response) {
         recipe.totalDaily = response.totalDaily;
         recipe.totalNutrients = response.totalNutrients;
@@ -170,13 +168,15 @@ function getIngredients(recipeIndex) {
     var mealID = recipe.recipesInfo.id;
     recipe.recipesInfo.instructionsList = [];
 
-    recipe.payload = { title: recipe.recipesInfo.title,
+    recipe.payload = {
+        title: recipe.recipesInfo.title,
         yeild: recipe.recipesInfo.servings,
         url: recipe.recipesInfo.sourceUrl,
-        ingr: [] };
+        ingr: []
+    };
     var spoontacularAPIKey = "6f83f09047444b16b026a6461826992c";
 
-   
+
 
     var queryURL = `https://api.spoonacular.com/recipes/${mealID}/information?apiKey=${spoontacularAPIKey}&includeNutrition=false`
     $.ajax({
@@ -193,12 +193,12 @@ function getIngredients(recipeIndex) {
                 recipe.recipesInfo.instructionsList.push(response.analyzedInstructions[j].steps[k].step);
                 var instructions = $("<p>");
                 instructions.html(recipe.recipesInfo.instructionsList);
-                
+
 
             }
         }
 
-       
+
 
         var ingredients = $("<ol>");
 
@@ -226,7 +226,7 @@ function getIngredients(recipeIndex) {
         $("#recipe-inst").append(instructionsTitle)
         $("#recipe-inst").append(instructions);
 
-    
-    getNutritionInfo(recipeIndex);
+
+        getNutritionInfo(recipeIndex);
     })
 }
