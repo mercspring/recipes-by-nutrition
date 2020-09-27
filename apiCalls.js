@@ -1,13 +1,15 @@
 // Search results and recipe info divs start off as invisible
 
 $("#search-results").attr("style", "display: none")
-
 $("#recipe-info").attr("style", "display: none")
 $("#topbar-search").attr("style", "opacity: 0.0")
 $("#favorites").attr("style", "opacity: 0.0")
 
 
+
+
 function displayNutritionInfo(recipeIndex) {
+    var nutritionDiv = $("#recipe-nutrition");
 
     nutritionDiv.empty();
 
@@ -96,10 +98,12 @@ $("#search-2").on("click", function (event) {
     getRecipes($("#recipe-search-2").val());
 })
 
-//On click handler for the induvidual list entries this function grabs the data-index attribute and feeds it into the getIngredients function
+//On click handler for the individual list entries this function grabs the data-index attribute and feeds it into the getIngredients function
 $(document).on("click", ".result", function (event) {
     event.preventDefault();
     $("#recipe-info").attr("style", "display: block")
+    $("#results-list").attr("class", "panel is-primary mobile-hide")
+    $("#mobile-buttons").attr("class", "mobile-show")
     getIngredients($(this).attr("data-index"));
 })
 
@@ -125,7 +129,7 @@ function getRecipes(searchTerm) {
 
     console.log("running search")
     searchTerm = searchTerm.trim()
-    var spoontacularAPIKey = "5babb627a31c457eabcb2fd3a13e65c3";
+    var spoontacularAPIKey = "67ecadda6de74697a2dbc8590ce5c42c";
     var spoontacularQueryURL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${spoontacularAPIKey}&query=${searchTerm}&instructionsRequired=true&addRecipeInformation=true`
     $("#search-area").fadeTo("medium", "0.0")
     $("#search-area").attr("style", "display: none");
