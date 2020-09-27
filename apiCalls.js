@@ -114,9 +114,12 @@ function getRecipes(searchTerm) {
     $("#search-area").attr("style", "display: none");
     $("#topbar-search").fadeTo("medium", "1.0");
     $("#results-list").empty();
-    var listTitle = $("<p>")
-    listTitle.attr("class", "panel-heading results-title");
-    listTitle.text("Search Results")
+    var listTitle = $("<div>")
+    listTitle.attr("class", "panel-heading")
+    var listText = $("<h2>");
+    listText.attr("class", "panel-title")
+    listText.text("Search Results")
+    listTitle.append(listText)
     $("#results-list").append(listTitle)
 
     $.ajax({
@@ -186,19 +189,17 @@ function getIngredients(recipeIndex) {
         recipe.recipesInfo.instructionsBlob = response.instructions;
         console.log(response)
 
-
+        var instructions = $("<ol>");
 
         for (var j = 0; j < response.analyzedInstructions.length; j++) {
             for (var k = 0; k < response.analyzedInstructions[j].steps.length; k++) {
                 recipe.recipesInfo.instructionsList.push(response.analyzedInstructions[j].steps[k].step);
-                var instructions = $("<p>");
-                instructions.html(recipe.recipesInfo.instructionsList);
-
+                var instructionsLi = $("<li>");
+                instructionsLi.text(recipe.recipesInfo.instructionsList[k]);
+                instructions.append(instructionsLi)
 
             }
         }
-
-
 
         var ingredients = $("<ol>");
 
@@ -216,9 +217,14 @@ function getIngredients(recipeIndex) {
         $("#recipe-inst").empty()
 
         var instructionsTitle = $("<h3>");
+        instructionsTitle.attr("class", "inst-title")
         instructionsTitle.text("Instructions: ")
         var ingredientsTitle = $("<h3>");
+        ingredientsTitle.attr("class", "inst-title")
         ingredientsTitle.text("Ingredients: ")
+
+        ingredients.attr("id", "ingredients-list")
+        instructions.attr("id", "instructions-list")
 
         $("#recipe-inst").append(recipeImg)
         $("#recipe-inst").append(ingredientsTitle)
