@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Recipes By Nutrition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Calistoga&family=Mandali&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
     <link rel="stylesheet" href="nutrition-label/nutritionLabel-stable-ver-9.0.10.css">
     <link rel="stylesheet" href="style.css">
@@ -45,12 +46,11 @@
 <!-- Search area for recipe: will be the only thing on opening page -->
 <div class= "container" id= "search-area">
       <div class="card column is-10 is-offset-1">
-          <header class= "card-header">
                 <p class= "card-header-title">
                     Search for a meal to begin!
                 </p>
                     
-                </header>
+            
                 
             <div class= "card-content">
                 <div class="field has-addons">
@@ -74,17 +74,14 @@
 <div class= "columns">
   <div class= "column is-4" id= "search-results">
           <article class="panel is-primary" id= "results-list">
-              <p class="panel-heading">
-                Search Results
-              </p>
           </article>
   </div>
 
 <!-- Column displaying recipe information when clicked on -->
   <div class= "column is-8" id= "recipe-info">
-    <div class = "card">
-      <div class= "card-header">
-        <h2 class= "card-header-title" id= "recipe-title"></h2>
+    <div class = "card panel is-primary">
+      <div class= "panel-heading">
+        <h2 class= "panel-title" id= "recipe-title"></h2>
       </div>
 
       <div class= "card-content">
