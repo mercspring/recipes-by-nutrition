@@ -27,17 +27,20 @@
         <div class= "column is-5">
           <div class="field has-addons" id= "topbar-search">
             <div class="control is-expanded has-icons-left">
-                    <input class="input is-medium is-primary" id= "recipe-search-2" type="text" placeholder="Type the meal here">
-                    <span class="icon is-left">
-                      <i class="fas fa-search" aria-hidden="true"></i>
-                    </span>
-                </div>
-              <div class= "control">
-                  <button class="button is-medium is-primary" id="search-2">
-                          Search
-                  </button>
-             </div>
+              <input class="input is-medium is-primary" id="recipe-search-2" type="text"
+                placeholder="Type the meal here">
+              <span class="icon is-left">
+                <i class="fas fa-search" aria-hidden="true"></i>
+              </span>
+            </div>
+            <div class="control">
+              <button class="button is-medium is-primary" id="search-2">
+                Search
+              </button>
+            </div>
           </div>
+          <p id="favorites"> Or <span class="favorites-link">view your saved favorites</span></p>
+        </div>
       </div>
      </div>
    </div>     
@@ -67,6 +70,7 @@
                    </div>
               </div>
           </div>
+        </div>
       </div>
 </div>
 
@@ -84,29 +88,37 @@
         <h2 class= "panel-title" id= "recipe-title"></h2>
       </div>
 
-      <div class= "card-content">
-        <div class= "columns">
-
-        <!-- The recipe will be put here -->
-          <div class= "column is-7" id= "recipe-inst">
-          </div>
-
-          <!-- The nutrition facts will be put here -->
-          <div class= "column is-5" id= "recipe-nutrition">
-          </div>
-
-
+    <!-- Column displaying recipe information when clicked on -->
+    <div class="column is-8" id="recipe-info">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-header-title" id="recipe-title"></h2>
         </div>
-      </div>
 
+        <div class="card-content">
+          <div class="columns">
+
+            <!-- The recipe will be put here -->
+            <div class="column is-7" id="recipe-inst">
+            </div>
+
+            <!-- The nutrition facts will be put here -->
+            <div class="column is-5" id="recipe-nutrition">
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
-</div>
-<script src="https://kit.fontawesome.com/0b49d94544.js" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-<script src="nutrition-label/nutritionLabel-stable-ver-9.0.10.js"></script>
-<script src="script.js"></script>
-<script src="apiCalls.js"></script>
-  </body>
-</html>
+  <script src="https://kit.fontawesome.com/0b49d94544.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+  <script src="nutrition-label/nutritionLabel-stable-ver-9.0.10.js"></script>
+  <script src="script.js"></script>
+  <script src="apiCalls.js"></script>
+</body>
 
+</html>

@@ -3,6 +3,8 @@
 $("#search-results").attr("style", "display: none")
 
 $("#recipe-info").attr("style", "display: none")
+$("#topbar-search").attr("style", "opacity: 0.0")
+$("#favorites").attr("style", "opacity: 0.0")
 
 
 function displayNutritionInfo(recipeIndex) {
@@ -18,7 +20,7 @@ function displayNutritionInfo(recipeIndex) {
     nutritionLabel.nutritionLabel(new NutritionObject(recipe));
 
 }
-
+//This function constructs the object to be based to the nutrition label generater
 function NutritionObject(recipe) {
     this.showDailyTotalFat = false;
     this.showDailyFibers = false;
@@ -50,7 +52,6 @@ function NutritionObject(recipe) {
     if (typeof recipe.totalNutrients.FE != 'undefined') this.valueIron = recipe.totalDaily.FE.quantity;
     this.showLegacyVersion = false;
 }
-$("#topbar-search").attr("style", "opacity: 0.0")
 
 // This function takes the index of the recipes array and appends the nutrution info to the corresponding recipe object
 function getNutritionInfo(recipeIndex) {
@@ -96,13 +97,29 @@ $("#search-2").on("click", function (event) {
 })
 
 //On click handler for the induvidual list entries this function grabs the data-index attribute and feeds it into the getIngredients function
-$(document).on("click", ".list-entry", function (event) {
+$(document).on("click", ".result", function (event) {
     event.preventDefault();
     $("#recipe-info").attr("style", "display: block")
     getIngredients($(this).attr("data-index"));
 })
 
+$(document).on("click", ".favorite", function (event) {
+    event.preventDefault();
+    $("#recipe-info").attr("style", "display: block")
+    displayFavoriteRecipe($(this).attr("data-mealID"));
+})
 
+$(document).on("click", ".favorites-link", function (event) {
+    event.preventDefault();
+    generateListOfFavorites();
+})
+
+$(document).on("click", "#add-favorite", function (event) {
+    event.preventDefault();
+    console.log($(this).attr("data-index"))
+    $("#add-favorite").text("⭑")
+    addToFavorites($(this).attr("data-index"))
+})
 //This function accepts a search term to be run through the spoonacular search api. It then populates the recipes array the resulting recipesInfo objects
 function getRecipes(searchTerm) {
 
@@ -113,7 +130,11 @@ function getRecipes(searchTerm) {
     $("#search-area").fadeTo("medium", "0.0")
     $("#search-area").attr("style", "display: none");
     $("#topbar-search").fadeTo("medium", "1.0");
+    $("#favorites").fadeTo("medium", "1.0");
     $("#results-list").empty();
+    $("#recipe-inst").empty();
+    $("#recipe-title").empty();
+    $("#recipe-nutrition").empty()
     var listTitle = $("<div>")
     listTitle.attr("class", "panel-heading")
     var listText = $("<h2>");
@@ -135,7 +156,7 @@ function getRecipes(searchTerm) {
             recipes[i].recipesInfo = response.results[i];
             $("#search-results").attr("style", "display: block")
             var listEntry = $("<a>");
-            listEntry.attr("class", "panel-block list-entry");
+            listEntry.attr("class", "panel-block list-entry result");
             listEntry.attr("data-index", i)
             var recipeDiv = $("<div>");
             recipeDiv.attr("class", "recipe-description");
@@ -160,8 +181,90 @@ function getRecipes(searchTerm) {
         }
     })
 }
+function addToFavorites(recipeIndex) {
+    savedFavorites[`${recipes[recipeIndex].recipesInfo.id}`] = recipes[recipeIndex];
+    localStorage.setItem("savedFavorites", JSON.stringify(savedFavorites));
+}
 
+function generateListOfFavorites() {
+    $("#search-area").fadeTo("medium", "0.0")
+    $("#search-area").attr("style", "display: none");
+    $("#topbar-search").fadeTo("medium", "1.0");
+    $("#favorites").fadeTo("medium", "1.0");
+    $("#results-list").empty();
+    $("#recipe-inst").empty();
+    $("#recipe-title").empty();
+    $("#recipe-nutrition").empty();
 
+    for (const mealID in savedFavorites) {
+        $("#search-results").attr("style", "display: block")
+        var listEntry = $("<a>");
+        listEntry.attr("class", "panel-block list-entry favorite");
+        listEntry.attr("data-mealID", mealID)
+        var recipeDiv = $("<div>");
+        recipeDiv.attr("class", "recipe-description");
+        var recipeFig = $("<figure>");
+        recipeFig.attr("class", "image is-128x128 recipe-img");
+        var recipeImg = $("<img>");
+        recipeImg.attr("src", savedFavorites[mealID].recipesInfo.image);
+        var recipeTitle = $("<p>");
+        recipeTitle.text(savedFavorites[mealID].recipesInfo.title)
+        recipeTitle.attr("style", "font-weight: bold");
+        var recipeTime = $("<p>");
+        recipeTime.text("Minutes to prepare: " + savedFavorites[mealID].recipesInfo.readyInMinutes)
+        var recipeServings = $("<p>");
+        recipeServings.text("Serving size: " + savedFavorites[mealID].recipesInfo.servings)
+        recipeFig.append(recipeImg)
+        recipeDiv.append(recipeFig)
+        recipeDiv.append(recipeTitle)
+        recipeDiv.append(recipeTime)
+        recipeDiv.append(recipeServings)
+        listEntry.append(recipeDiv)
+        $("#results-list").append(listEntry)
+    }
+}
+
+function displayFavoriteRecipe(mealID) {
+    var ingredients = $("<ol>");
+    var recipe = savedFavorites[`${mealID}`]
+
+    $("#recipe-title").html(`${recipe.payload.title} &nbsp; &nbsp; <span id="add-favorite">⭑</span>`);
+    for (var i = 0; i < recipe.payload.ingr.length; i++) {
+        var ingredientIndiv = $("<li>");
+        ingredientIndiv.text(recipe.payload.ingr[i]);
+        ingredients.append(ingredientIndiv)
+
+    }
+
+    var recipeImg = $("<img>")
+    recipeImg.attr("src", recipe.recipesInfo.image)
+
+    $("#recipe-inst").empty()
+    var instructions = $("<p>");
+    instructions.html(recipe.recipesInfo.instructionsList);
+
+    var instructionsTitle = $("<h3>");
+    instructionsTitle.text("Instructions: ")
+    var ingredientsTitle = $("<h3>");
+    ingredientsTitle.text("Ingredients: ")
+
+    $("#recipe-inst").append(recipeImg)
+    $("#recipe-inst").append(ingredientsTitle)
+    $("#recipe-inst").append(ingredients)
+    $("#recipe-inst").append(instructionsTitle)
+    $("#recipe-inst").append(instructions);
+
+    nutritionDiv.empty();
+
+    var recipe = savedFavorites[mealID];
+    var nutritionLabel = $("<div>");
+
+    nutritionLabel.attr("id", "nutrition-label");
+    nutritionDiv.append(nutritionLabel);
+
+    nutritionLabel.nutritionLabel(new NutritionObject(recipe));
+
+}
 
 
 //This function takes an index from the recipes array, querries the spoonacular api with the meal id (originaly obtained as part of the recipe) and adds the resulting ingredient info onto the induvidual recipe object in the form of a payload object
@@ -205,13 +308,17 @@ function getIngredients(recipeIndex) {
 
         for (var i = 0; i < response.extendedIngredients.length; i++) {
             recipe.payload.ingr.push(response.extendedIngredients[i].original);
-            $("#recipe-title").text(recipe.payload.title);
             var ingredientIndiv = $("<li>");
             ingredientIndiv.text(recipe.payload.ingr[i]);
             ingredients.append(ingredientIndiv)
             var recipeImg = $("<img>")
             recipeImg.attr("src", recipe.recipesInfo.image)
 
+        }
+        if(recipe.recipesInfo.id in savedFavorites){
+            $("#recipe-title").html(`${recipe.payload.title} &nbsp; &nbsp; <span>⭑</span>`);
+        }else{
+            $("#recipe-title").html(`${recipe.payload.title} &nbsp; &nbsp; <span data-index='${recipeIndex}' id="add-favorite">✩</span>`);
         }
 
         $("#recipe-inst").empty()

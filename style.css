@@ -83,3 +83,12 @@ body {
     padding-left: 35px;
 }
 
+#add-favorite{
+    font-size: 14pt;
+    cursor: pointer;
+}
+
+.favorites-link{
+    color: purple;
+    cursor: pointer;
+}
