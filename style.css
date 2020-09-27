@@ -83,7 +83,7 @@ body {
     padding-left: 35px;
 }
 
-#add-favorite{
+#add-favorite,#remove-favorite{
     /* font-size: 14pt; */
     cursor: pointer;
 }
@@ -93,7 +93,12 @@ body {
     opacity: 50%;
     font-size: 13pt;
 }
+#remove-favorite:hover::after{
 
+    content:" ~ Remove from Favorites";
+    opacity: 50%;
+    font-size: 13pt;
+}
 .favorites-link{
     color: rgb(76, 76, 235);
     cursor: pointer;
