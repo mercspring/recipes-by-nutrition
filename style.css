@@ -88,6 +88,10 @@ body {
     cursor: pointer;
 }
 
+#mobile-buttons {
+    padding-top: 10px;
+    margin: 0 auto; }
+
 #add-favorite:hover::after{
     content:" ~ Add to Favorites";
     opacity: 50%;
@@ -99,3 +103,18 @@ body {
     cursor: pointer;
 }
 
+.desktop-hide {
+    display: none;
+}
+
+@media only screen and (max-width: 600px) {
+    .mobile-hide {
+        display: none;
+    }
+
+    .mobile-show {
+        display: flex;
+        align-content: center;
+    }
+    
+  }
