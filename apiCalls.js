@@ -16,12 +16,9 @@ function displayNutritionInfo(recipeIndex) {
     nutritionDiv.append(nutritionLabel);
 
     nutritionLabel.nutritionLabel({
-        showDailyTotalFat: false,
-        showDailySodium: false,
-        showDailyFibers: false,
-        showDailyAddedSugars: false,
-        showDailyCalcium: false,
-        showDailyIron: false,
+,
+        showDailyProtein: true,
+
         showCaffeine: false,
         valueServingUnitQuantity : recipe.recipesInfo.servings,
         showIngredients : false,
@@ -34,6 +31,7 @@ function displayNutritionInfo(recipeIndex) {
 
         valueCalories: recipe.totalNutrientsKCal.ENERC_KCAL.quantity,
         valueFatCalories: recipe.totalNutrientsKCal.FAT_KCAL.quantity,
+
         valueTotalFat: recipe.totalNutrients.FAT.quantity,
         valueSatFat: recipe.totalNutrients.FASAT.quantity,
         valueTransFat: recipe.totalNutrients.FATRN.quantity,
@@ -43,10 +41,11 @@ function displayNutritionInfo(recipeIndex) {
         valueFibers: recipe.totalNutrients.FIBTG.quantity,
         valueSugars: recipe.totalNutrients.SUGAR.quantity ,
         valueProteins: recipe.totalNutrients.PROCNT.quantity,
-        valueVitaminD: recipe.totalNutrients.VITD.quantity,
-        valuePotassium_2018: recipe.totalNutrients.K.quantity,
-        valueCalcium: recipe.totalNutrients.CA.quantity,
-        valueIron: recipe.totalNutrients.FE.quantity,
+
+        valueVitaminD: recipe.totalDaily.VITD.quantity,
+        valuePotassium_2018: recipe.totalDaily.K.quantity,
+        valueCalcium: recipe.totalDaily.CA.quantity,
+        valueIron: recipe.totalDaily.FE.quantity,
         showLegacyVersion: false
 
     });
