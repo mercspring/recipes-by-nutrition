@@ -116,11 +116,17 @@ function getRecipes(searchTerm) {
     $("#search-area").attr("style", "display: none");
     $("#topbar-search").fadeTo("medium", "1.0");
     $("#results-list").empty();
+    var listTitle = $("<p>")
+    listTitle.attr("class", "panel-heading results-title");
+    listTitle.text("Search Results")
+    $("#results-list").append(listTitle)
 
     $.ajax({
         method: "GET",
         url: spoontacularQueryURL
     }).then(function (response) {
+
+       
 
         // Pushes the res
         for (var i = 0; i < response.results.length; i++) {

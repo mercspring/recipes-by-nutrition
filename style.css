@@ -1,7 +1,16 @@
 .hero {
     margin-bottom: 20px;
     background-color: lightgreen;
+    position: sticky;
 
+}
+
+.title {
+    font-family: 'Calistoga', cursive;
+}
+
+.subtitle {
+    font-family: 'Mandali', sans-serif;
 }
 
 body {
@@ -9,6 +18,10 @@ body {
     color: black;
 }
 
+.card-header-title {
+    font-family: 'Mandali', sans-serif;
+    font-size: 30px;
+}
 
 .is-hoverable{
     text-align: right;
@@ -26,6 +39,12 @@ body {
     
 }
 
+.results-title {
+    font-family: 'Calistoga', cursive;
+    font-size: 25px;
+
+}
+
 .section{
     background-color: lightgreen;
     
@@ -35,11 +54,13 @@ body {
     padding-top: 50px;
 }
 
+
 .recipe-img {
     float:right;
 }
 
 .recipe-description {
     width: 100%;
+    font-family: 'Mandali', sans-serif;
 }
 
