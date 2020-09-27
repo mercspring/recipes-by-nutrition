@@ -125,7 +125,7 @@ function getRecipes(searchTerm) {
 
     console.log("running search")
     searchTerm = searchTerm.trim()
-    var spoontacularAPIKey = "5babb627a31c457eabcb2fd3a13e65c3";
+    var spoontacularAPIKey = "67ecadda6de74697a2dbc8590ce5c42c";
     var spoontacularQueryURL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${spoontacularAPIKey}&query=${searchTerm}&instructionsRequired=true&addRecipeInformation=true`
     $("#search-area").fadeTo("medium", "0.0")
     $("#search-area").attr("style", "display: none");
@@ -280,7 +280,7 @@ function getIngredients(recipeIndex) {
         url: recipe.recipesInfo.sourceUrl,
         ingr: []
     };
-    var spoontacularAPIKey = "6f83f09047444b16b026a6461826992c";
+    var spoontacularAPIKey = "67ecadda6de74697a2dbc8590ce5c42c";
 
 
 
