@@ -5,13 +5,7 @@ $("#recipe-info").attr("style", "display: none")
 $("#topbar-search").attr("style", "opacity: 0.0")
 $("#favorites").attr("style", "opacity: 0.0")
 
-<<<<<<< HEAD
 //This function displays the recipe info on the page
-=======
-
-
-
->>>>>>> dev
 function displayNutritionInfo(recipeIndex) {
     var nutritionDiv = $("#recipe-nutrition");
 
