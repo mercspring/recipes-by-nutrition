@@ -103,7 +103,7 @@ $(document).on("click", ".result", function (event) {
     $("#results-list").attr("class", "panel is-primary mobile-hide")
     $("#mobile-buttons").removeClass("desktop-hide")
     $("#mobile-buttons").attr("class", "mobile-show")
-    // $("#results-list").attr("style", "display: block");
+    $("#results-list").attr("style", "display: block");
     getIngredients($(this).attr("data-index"));
 })
 
