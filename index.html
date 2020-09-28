@@ -40,10 +40,10 @@
             </div>
           </div>
           <p id="favorites"> Or <span class="favorites-link">view your saved favorites</span></p>
-          <div id="mobile-buttons" class= "desktop-hide">
-            <button class= "button is-primary is-light"> Search Results</button>
-            <button class= "button is-primary is-light"> Recipe</button>
-            <button class= "button is-primary is-light"> Nutrition Info</button>
+          <div class="desktop-hide" id="mobile-buttons">
+            <button class= "button is-primary is-light" id= "mobile-search"> Search Results</button>
+            <button class= "button is-primary is-light" id= "mobile-recipe"> Recipe</button>
+            <button class= "button is-primary is-light" id= "mobile-nutrition"> Nutrition Info</button>
           </div>
         </div>
       </div>
@@ -82,7 +82,7 @@
 
 <!-- Recipe list: should pop up when search button is clicked and display recipes -->
 <div class= "columns">
-  <div class= "column is-4" id= "search-results">
+  <div class= "column is-4" id="search-results">
           <article class="panel is-primary" id= "results-list">
           </article>
   </div>

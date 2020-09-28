@@ -101,6 +101,7 @@ $(document).on("click", ".result", function (event) {
     event.preventDefault();
     $("#recipe-info").attr("style", "display: block")
     $("#results-list").attr("class", "panel is-primary mobile-hide")
+    $("#mobile-buttons").removeClass("desktop-hide")
     $("#mobile-buttons").attr("class", "mobile-show")
     getIngredients($(this).attr("data-index"));
 })
@@ -283,9 +284,14 @@ function displayFavoriteRecipe(mealID) {
     instructions.html(recipe.recipesInfo.instructionsList);
 
     var instructionsTitle = $("<h3>");
+    instructionsTitle.attr("class", "inst-title")
     instructionsTitle.text("Instructions: ")
     var ingredientsTitle = $("<h3>");
+    ingredientsTitle.attr("class", "inst-title")
     ingredientsTitle.text("Ingredients: ")
+
+    ingredients.attr("class", "ingredients-list")
+    instructions.attr("class", "instructions-list")
 
     $("#recipe-inst").append(recipeImg)
     $("#recipe-inst").append(ingredientsTitle)
@@ -369,8 +375,8 @@ function getIngredients(recipeIndex) {
         ingredientsTitle.attr("class", "inst-title")
         ingredientsTitle.text("Ingredients: ")
 
-        ingredients.attr("id", "ingredients-list")
-        instructions.attr("id", "instructions-list")
+        ingredients.attr("class", "ingredients-list")
+        instructions.attr("class", "instructions-list")
 
         $("#recipe-inst").append(recipeImg)
         $("#recipe-inst").append(ingredientsTitle)
@@ -382,3 +388,25 @@ function getIngredients(recipeIndex) {
         getNutritionInfo(recipeIndex);
     })
 }
+
+$("#mobile-search").on("click", function(event) {
+    event.preventDefault();
+    $("#results-list").attr("style", "display: block");
+    $("#recipe-info").attr("style", "display: none");
+})
+
+$("#mobile-recipe").on("click", function(event) {
+    event.preventDefault();
+    $("#results-list").attr("style", "display: none");
+    $("#recipe-info").attr("style", "display: block");
+    $("#recipe-inst").attr("style", "display: block");
+    $("#recipe-nutrition").attr("style", "display: none");
+})
+
+$("#mobile-nutrition").on("click", function(event) {
+    event.preventDefault();
+    $("#results-list").attr("style", "display: none");
+    $("#recipe-info").attr("style", "display: block");
+    $("#recipe-inst").attr("style", "display: none");
+    $("#recipe-nutrition").attr("style", "display: block");
+})
