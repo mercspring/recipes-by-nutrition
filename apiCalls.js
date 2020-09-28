@@ -1,5 +1,16 @@
-// Search results and recipe info divs start off as invisible
+//Global Variables
+var recipes = [];
+var nutritionDiv = $("#recipe-nutrition");
 
+// Grabs the saved favorites from localstorage if there are any
+if (!localStorage.getItem("savedFavorites")) {
+    var savedFavorites = {};
+} else{
+    savedFavorites = JSON.parse(localStorage.getItem("savedFavorites"))
+}
+
+
+// Search results and recipe info divs start off as invisible
 $("#search-results").attr("style", "display: none")
 $("#recipe-info").attr("style", "visibility: hidden")
 $("#topbar-search").attr("style", "opacity: 0.0")
@@ -20,7 +31,7 @@ function displayNutritionInfo(recipeIndex) {
     nutritionLabel.nutritionLabel(new NutritionObject(recipe));
 
 }
-//This function constructs the object to be based to the nutrition label generater
+//This function constructs the object to be based to the nutrition label generator
 function NutritionObject(recipe) {
     this.showDailyTotalFat = false;
     this.showDailyFibers = false;
@@ -89,6 +100,7 @@ $("#search").on("click", function (event) {
     getRecipes($("#recipe-search").val());
 })
 
+//Returns search results on click from the input field and feeds it into the getRecipes function for the topbar search function 
 $("#search-2").on("click", function (event) {
     event.preventDefault();
     recipes = [];
@@ -107,12 +119,13 @@ $(document).on("click", ".result", function (event) {
     getIngredients($(this).attr("data-index"));
 })
 
-//On click handler for the induvidual favorites entries, this calls the function to display the saved recipe
+//On click handler for the individual favorites entries, this calls the function to display the saved recipe
 $(document).on("click", ".favorite", function (event) {
     event.preventDefault();
     $("#recipe-info").attr("style", "visibility: visible")
     displayFavoriteRecipe($(this).attr("data-mealID"));
 })
+
 //On click handler for the display favorites link, this calls the function to clear the page and generate the list of favorites
 $(document).on("click", ".favorites-link", function (event) {
     event.preventDefault();
@@ -134,6 +147,7 @@ $(document).on("click", "#remove-favorite", function (event) {
     event.preventDefault();
     removeFavorite($(this).attr("data-mealID"))
 })
+
 //This function accepts a search term to be run through the spoonacular search api. It then populates the recipes array the resulting recipesInfo objects
 function getRecipes(searchTerm) {
 
@@ -393,12 +407,14 @@ function getIngredients(recipeIndex) {
     })
 }
 
+//On click function to toggle visibility for the search results on mobile, using the buttons that only pop up on mobile
 $(document).on("click", "#mobile-search", function(event) {
     event.preventDefault();
     $("#results-list").css("display", "block")
     $("#recipe-info").css("display", "none")
 })
 
+// On-click function for the recipe view button on mobile
 $(document).on("click", "#mobile-recipe", function(event) {
     event.preventDefault();
     $("#results-list").css("display", "none")
@@ -407,6 +423,7 @@ $(document).on("click", "#mobile-recipe", function(event) {
     $("#recipe-nutrition").css("display", "none");
 })
 
+// On-click function for the nutrition label view on mobile
 $(document).on("click", "#mobile-nutrition", function(event) {
     event.preventDefault();
     $("#results-list").css("display", "none");
