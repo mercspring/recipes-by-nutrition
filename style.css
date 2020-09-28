@@ -1,6 +1,5 @@
 .hero {
     margin-bottom: 20px;
-    background-color: #9AE798;
 
 }
 
@@ -98,6 +97,11 @@ body {
 #mobile-buttons {
     padding-top: 10px;
     margin: auto;
+    justify-content: center;
+}
+
+.button-mobile {
+    margin-right: 15px;
 }
 
 #add-favorite:hover::after{
@@ -113,9 +117,18 @@ body {
     font-size: 13pt;
 }
 
-.favorites-link{
-    color: rgb(76, 76, 235);
+#favorites {
+    font-family: 'Mandali', sans-serif;
+    font-size: 20px;
+}
+
+.favorites-link {
+    color: whitesmoke;
     cursor: pointer;
+}
+
+.teal{
+    color: #00d1b2;
 }
 
 @media screen and (max-width: 600px) {
@@ -139,11 +152,15 @@ body {
     }
 
     .mobile-show {
-        display: block;
+        display: flex;
     }
 
     .desktop-hide {
         display: none;
+    }
+
+    #favorites {
+        text-align: center;
     }
 
     #search-area {
@@ -157,8 +174,6 @@ body {
     #recipe-info {
         padding-top: 0px;
     }
-
-
 
 
     
