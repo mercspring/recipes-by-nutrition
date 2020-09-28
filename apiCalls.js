@@ -1,7 +1,7 @@
 // Search results and recipe info divs start off as invisible
 
 $("#search-results").attr("style", "display: none")
-$("#recipe-info").attr("style", "display: none")
+$("#recipe-info").attr("style", "visibility: hidden")
 $("#topbar-search").attr("style", "opacity: 0.0")
 $("#favorites").attr("style", "opacity: 0.0")
 
@@ -99,22 +99,26 @@ $("#search-2").on("click", function (event) {
 //On click handler for the individual list entries this function grabs the data-index attribute and feeds it into the getIngredients function
 $(document).on("click", ".result", function (event) {
     event.preventDefault();
-    $("#recipe-info").attr("style", "display: block")
+    $("#recipe-info").attr("style", "visibility: visible")
     $("#results-list").attr("class", "panel is-primary mobile-hide")
     $("#mobile-buttons").removeClass("desktop-hide")
     $("#mobile-buttons").attr("class", "mobile-show")
+    $("#results-list").attr("style", "display: block");
     getIngredients($(this).attr("data-index"));
 })
 
 //On click handler for the induvidual favorites entries, this calls the function to display the saved recipe
 $(document).on("click", ".favorite", function (event) {
     event.preventDefault();
-    $("#recipe-info").attr("style", "display: block")
+    $("#recipe-info").attr("style", "visibility: visible")
     displayFavoriteRecipe($(this).attr("data-mealID"));
 })
 //On click handler for the display favorites link, this calls the function to clear the page and generate the list of favorites
 $(document).on("click", ".favorites-link", function (event) {
     event.preventDefault();
+    $("#results-list").attr("class", "panel is-primary mobile-hide")
+    $("#mobile-buttons").removeClass("desktop-hide")
+    $("#mobile-buttons").attr("class", "mobile-show")
     generateListOfFavorites();
 })
 
@@ -325,7 +329,7 @@ function getIngredients(recipeIndex) {
         url: recipe.recipesInfo.sourceUrl,
         ingr: []
     };
-    var spoontacularAPIKey = "067c508c55684529951d621c0c9b2b92";
+    var spoontacularAPIKey = "5def404641f24722b2b210db9d881179";
 
 
 
@@ -389,24 +393,24 @@ function getIngredients(recipeIndex) {
     })
 }
 
-$("#document").on("click", "#mobile-search", function(event) {
+$(document).on("click", "#mobile-search", function(event) {
     event.preventDefault();
-    $("#results-list").attr("style", "display: block");
-    $("#recipe-info").attr("style", "display: none");
+    $("#results-list").css("display", "block")
+    $("#recipe-info").css("display", "none")
 })
 
-$("#document").on("click", "#mobile-recipe", function(event) {
+$(document).on("click", "#mobile-recipe", function(event) {
     event.preventDefault();
-    $("#results-list").attr("style", "display: none");
-    $("#recipe-info").attr("style", "display: block");
-    $("#recipe-inst").attr("style", "display: block");
-    $("#recipe-nutrition").attr("style", "display: none");
+    $("#results-list").css("display", "none")
+    $("#recipe-info").css("display", "block");
+    $("#recipe-inst").css("display", " block");
+    $("#recipe-nutrition").css("display", "none");
 })
 
-$("#document").on("click", "mobile-nutrition", function(event) {
+$(document).on("click", "#mobile-nutrition", function(event) {
     event.preventDefault();
-    $("#results-list").attr("style", "display: none");
-    $("#recipe-info").attr("style", "display: block");
-    $("#recipe-inst").attr("style", "display: none");
-    $("#recipe-nutrition").attr("style", "display: block");
+    $("#results-list").css("display", "none");
+    $("#recipe-info").css("display", "block");
+    $("#recipe-inst").css("display", "none");
+    $("#recipe-nutrition").css("display", "block");
 })

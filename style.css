@@ -55,10 +55,6 @@ body {
     opacity: 0.0;
 }
 
-#favorites {
-    opacity: 0.0;
-}
-
 .section{
     background-color: lightgreen;
     
@@ -131,6 +127,10 @@ body {
     cursor: pointer;
 }
 
+.teal{
+    color: #00d1b2;
+}
+
 @media screen and (max-width: 600px) {
 
     .hero {
@@ -179,14 +179,14 @@ body {
     
   }
 
-  @media screen and (min-width: 601px) {
+  @media screen and (min-width: 610px) {
 
-    .mobile-show {
+    .mobile-show, .desktop-hide {
         display: none;
     }
 
-    .desktop-hide {
-        display: none;
+    #recipe-info, #recipe-nutrition, #recipe-inst, #results-list{
+        display: block !important;
     }
-    
+
   }
