@@ -61,8 +61,8 @@ function getNutritionInfo(recipeIndex) {
     console.log(recipeIndex)
     console.log(recipe)
 
-    var edamamAppID = "54341639";
-    var edamamAppKey = "2b934b4fbdc728a5963000b8634dddce";
+    var edamamAppID = "33eb5757";
+    var edamamAppKey = "3f49d15bad2ccb193b05ed14bf175958";
     var edamamQueryURL = `https://api.edamam.com/api/nutrition-details?app_id=${edamamAppID}&app_key=${edamamAppKey}&force`
 
     // var payload = { title: recipe.title, yield: recipe.servings, ingr: recipe.ingredients }
@@ -135,7 +135,7 @@ function getRecipes(searchTerm) {
 
     console.log("running search")
     searchTerm = searchTerm.trim()
-    var spoontacularAPIKey = "067c508c55684529951d621c0c9b2b92";
+    var spoontacularAPIKey = "5babb627a31c457eabcb2fd3a13e65c3";
     var spoontacularQueryURL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${spoontacularAPIKey}&query=${searchTerm}&instructionsRequired=true&addRecipeInformation=true`
     $("#search-area").fadeTo("medium", "0.0")
     $("#search-area").attr("style", "display: none");
@@ -389,13 +389,13 @@ function getIngredients(recipeIndex) {
     })
 }
 
-$("#mobile-search").on("click", function(event) {
+$("#document").on("click", "#mobile-search", function(event) {
     event.preventDefault();
     $("#results-list").attr("style", "display: block");
     $("#recipe-info").attr("style", "display: none");
 })
 
-$("#mobile-recipe").on("click", function(event) {
+$("#document").on("click", "#mobile-recipe", function(event) {
     event.preventDefault();
     $("#results-list").attr("style", "display: none");
     $("#recipe-info").attr("style", "display: block");
@@ -403,7 +403,7 @@ $("#mobile-recipe").on("click", function(event) {
     $("#recipe-nutrition").attr("style", "display: none");
 })
 
-$("#mobile-nutrition").on("click", function(event) {
+$("#document").on("click", "mobile-nutrition", function(event) {
     event.preventDefault();
     $("#results-list").attr("style", "display: none");
     $("#recipe-info").attr("style", "display: block");
