@@ -1,6 +1,5 @@
 .hero {
     margin-bottom: 20px;
-    background-color: #9AE798;
 
 }
 
@@ -42,11 +41,18 @@ body {
     margin-top: 80px;
     margin-left: 280px;
     width: 50%;
-    
+}
+
+#search-results {
+    display: none;
 }
 
 #recipe-info {
     font-family: 'Mandali', sans-serif;
+}
+
+#topbar-search {
+    opacity: 0.0;
 }
 
 .section{
@@ -74,21 +80,113 @@ body {
     font-size: 20px;
 }
 
-#ingredients-list {
+.ingredients-list {
     padding-left: 35px;
     padding-bottom: 20px;
 }
 
-#instructions-list {
+.instructions-list {
     padding-left: 35px;
 }
 
-#add-favorite{
-    font-size: 14pt;
+#add-favorite,#remove-favorite{
+    /* font-size: 14pt; */
     cursor: pointer;
 }
 
-.favorites-link{
-    color: purple;
+#mobile-buttons {
+    padding-top: 10px;
+    margin: auto;
+    justify-content: center;
+}
+
+.button-mobile {
+    margin-right: 15px;
+}
+
+#add-favorite:hover::after{
+    content:" ~ Add to Favorites";
+    opacity: 50%;
+    font-size: 13pt;
+}
+
+#remove-favorite:hover::after{
+
+    content:" ~ Remove from Favorites";
+    opacity: 50%;
+    font-size: 13pt;
+}
+
+#favorites {
+    font-family: 'Mandali', sans-serif;
+    font-size: 20px;
+}
+
+.favorites-link {
+    color: whitesmoke;
     cursor: pointer;
 }
+
+.teal{
+    color: #00d1b2;
+}
+
+@media screen and (max-width: 600px) {
+
+    .hero {
+        padding-bottom: 0px;
+    }
+
+    .title {
+        font-size: 35px;
+        text-align: center;
+    }
+
+    .subtitle {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .mobile-hide {
+        display: none;
+    }
+
+    .mobile-show {
+        display: flex;
+    }
+
+    .desktop-hide {
+        display: none;
+    }
+
+    #favorites {
+        text-align: center;
+    }
+
+    #search-area {
+        padding-top: 0px;
+    }
+
+    #search-results {
+        padding-top: 0px;
+    }
+
+    #recipe-info {
+        padding-top: 0px;
+    }
+
+
+    
+  }
+
+  @media screen and (min-width: 610px) {
+
+    .mobile-show, .desktop-hide {
+        display: none;
+    }
+
+    #recipe-info, #recipe-nutrition, #recipe-inst, #results-list{
+        display: block !important;
+    }
+
+  }

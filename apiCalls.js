@@ -1,13 +1,24 @@
+//Global Variables
+var recipes = [];
+var nutritionDiv = $("#recipe-nutrition");
+
+// Grabs the saved favorites from localstorage if there are any
+if (!localStorage.getItem("savedFavorites")) {
+    var savedFavorites = {};
+} else{
+    savedFavorites = JSON.parse(localStorage.getItem("savedFavorites"))
+}
+
+
 // Search results and recipe info divs start off as invisible
-
 $("#search-results").attr("style", "display: none")
-
-$("#recipe-info").attr("style", "display: none")
+$("#recipe-info").attr("style", "visibility: hidden")
 $("#topbar-search").attr("style", "opacity: 0.0")
 $("#favorites").attr("style", "opacity: 0.0")
 
-
+//This function displays the recipe info on the page
 function displayNutritionInfo(recipeIndex) {
+    var nutritionDiv = $("#recipe-nutrition");
 
     nutritionDiv.empty();
 
@@ -20,7 +31,7 @@ function displayNutritionInfo(recipeIndex) {
     nutritionLabel.nutritionLabel(new NutritionObject(recipe));
 
 }
-//This function constructs the object to be based to the nutrition label generater
+//This function constructs the object to be based to the nutrition label generator
 function NutritionObject(recipe) {
     this.showDailyTotalFat = false;
     this.showDailyFibers = false;
@@ -61,8 +72,8 @@ function getNutritionInfo(recipeIndex) {
     console.log(recipeIndex)
     console.log(recipe)
 
-    var edamamAppID = "54341639";
-    var edamamAppKey = "2b934b4fbdc728a5963000b8634dddce";
+    var edamamAppID = "33eb5757";
+    var edamamAppKey = "3f49d15bad2ccb193b05ed14bf175958";
     var edamamQueryURL = `https://api.edamam.com/api/nutrition-details?app_id=${edamamAppID}&app_key=${edamamAppKey}&force`
 
     // var payload = { title: recipe.title, yield: recipe.servings, ingr: recipe.ingredients }
@@ -89,6 +100,7 @@ $("#search").on("click", function (event) {
     getRecipes($("#recipe-search").val());
 })
 
+//Returns search results on click from the input field and feeds it into the getRecipes function for the topbar search function 
 $("#search-2").on("click", function (event) {
     event.preventDefault();
     recipes = [];
@@ -96,36 +108,52 @@ $("#search-2").on("click", function (event) {
     getRecipes($("#recipe-search-2").val());
 })
 
-//On click handler for the induvidual list entries this function grabs the data-index attribute and feeds it into the getIngredients function
+//On click handler for the individual list entries this function grabs the data-index attribute and feeds it into the getIngredients function
 $(document).on("click", ".result", function (event) {
     event.preventDefault();
-    $("#recipe-info").attr("style", "display: block")
+    $("#recipe-info").attr("style", "visibility: visible")
+    $("#results-list").attr("class", "panel is-primary mobile-hide")
+    $("#mobile-buttons").removeClass("desktop-hide")
+    $("#mobile-buttons").attr("class", "mobile-show")
+    $("#results-list").attr("style", "display: block");
     getIngredients($(this).attr("data-index"));
 })
 
+//On click handler for the individual favorites entries, this calls the function to display the saved recipe
 $(document).on("click", ".favorite", function (event) {
     event.preventDefault();
-    $("#recipe-info").attr("style", "display: block")
+    $("#recipe-info").attr("style", "visibility: visible")
     displayFavoriteRecipe($(this).attr("data-mealID"));
 })
 
+//On click handler for the display favorites link, this calls the function to clear the page and generate the list of favorites
 $(document).on("click", ".favorites-link", function (event) {
     event.preventDefault();
+    $("#results-list").attr("class", "panel is-primary mobile-hide")
+    $("#mobile-buttons").removeClass("desktop-hide")
+    $("#mobile-buttons").attr("class", "mobile-show")
     generateListOfFavorites();
 })
 
+//On click handler to add something to the favorites object
 $(document).on("click", "#add-favorite", function (event) {
     event.preventDefault();
-    console.log($(this).attr("data-index"))
     $("#add-favorite").text("⭑")
     addToFavorites($(this).attr("data-index"))
 })
+
+//On click handler to remove something from your favorites list
+$(document).on("click", "#remove-favorite", function (event) {
+    event.preventDefault();
+    removeFavorite($(this).attr("data-mealID"))
+})
+
 //This function accepts a search term to be run through the spoonacular search api. It then populates the recipes array the resulting recipesInfo objects
 function getRecipes(searchTerm) {
 
     console.log("running search")
     searchTerm = searchTerm.trim()
-    var spoontacularAPIKey = "67ecadda6de74697a2dbc8590ce5c42c";
+    var spoontacularAPIKey = "5babb627a31c457eabcb2fd3a13e65c3";
     var spoontacularQueryURL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${spoontacularAPIKey}&query=${searchTerm}&instructionsRequired=true&addRecipeInformation=true`
     $("#search-area").fadeTo("medium", "0.0")
     $("#search-area").attr("style", "display: none");
@@ -147,8 +175,6 @@ function getRecipes(searchTerm) {
         method: "GET",
         url: spoontacularQueryURL
     }).then(function (response) {
-
-       
 
         // Pushes the res
         for (var i = 0; i < response.results.length; i++) {
@@ -179,13 +205,33 @@ function getRecipes(searchTerm) {
             listEntry.append(recipeDiv)
             $("#results-list").append(listEntry)
         }
+        if (recipes.length === 0) {
+            $("#search-results").attr("style", "display: block")
+            $("#results-list").append("<p class='has-text-centered'>No Results</p>");
+        }
     })
 }
+
+//Function that removes a favorite from the favorites object, updates localstorage and clears the recipe area
+function removeFavorite(mealID) {
+    delete savedFavorites[mealID];
+
+    $("#results-list").empty();
+    $("#recipe-inst").empty();
+    $("#recipe-title").empty();
+    $("#recipe-nutrition").empty();
+
+    localStorage.setItem("savedFavorites", JSON.stringify(savedFavorites));
+    generateListOfFavorites();
+}
+
+//Function that adds a favorite to the favorites object and updates localstorage
 function addToFavorites(recipeIndex) {
     savedFavorites[`${recipes[recipeIndex].recipesInfo.id}`] = recipes[recipeIndex];
     localStorage.setItem("savedFavorites", JSON.stringify(savedFavorites));
 }
 
+//Function that clears the page and generates the list of saved favorites
 function generateListOfFavorites() {
     $("#search-area").fadeTo("medium", "0.0")
     $("#search-area").attr("style", "display: none");
@@ -195,40 +241,52 @@ function generateListOfFavorites() {
     $("#recipe-inst").empty();
     $("#recipe-title").empty();
     $("#recipe-nutrition").empty();
-
-    for (const mealID in savedFavorites) {
+    var listTitle = $("<div>")
+    listTitle.attr("class", "panel-heading")
+    var listText = $("<h2>");
+    listText.attr("class", "panel-title")
+    listText.text("Favorites")
+    listTitle.append(listText)
+    $("#results-list").append(listTitle)
+    if (jQuery.isEmptyObject(savedFavorites)) {
         $("#search-results").attr("style", "display: block")
-        var listEntry = $("<a>");
-        listEntry.attr("class", "panel-block list-entry favorite");
-        listEntry.attr("data-mealID", mealID)
-        var recipeDiv = $("<div>");
-        recipeDiv.attr("class", "recipe-description");
-        var recipeFig = $("<figure>");
-        recipeFig.attr("class", "image is-128x128 recipe-img");
-        var recipeImg = $("<img>");
-        recipeImg.attr("src", savedFavorites[mealID].recipesInfo.image);
-        var recipeTitle = $("<p>");
-        recipeTitle.text(savedFavorites[mealID].recipesInfo.title)
-        recipeTitle.attr("style", "font-weight: bold");
-        var recipeTime = $("<p>");
-        recipeTime.text("Minutes to prepare: " + savedFavorites[mealID].recipesInfo.readyInMinutes)
-        var recipeServings = $("<p>");
-        recipeServings.text("Serving size: " + savedFavorites[mealID].recipesInfo.servings)
-        recipeFig.append(recipeImg)
-        recipeDiv.append(recipeFig)
-        recipeDiv.append(recipeTitle)
-        recipeDiv.append(recipeTime)
-        recipeDiv.append(recipeServings)
-        listEntry.append(recipeDiv)
-        $("#results-list").append(listEntry)
+        $("#results-list").append("<p class='has-text-centered'>No Saved Favorites</p>");
+    } else {
+        for (const mealID in savedFavorites) {
+            $("#search-results").attr("style", "display: block")
+            var listEntry = $("<a>");
+            listEntry.attr("class", "panel-block list-entry favorite");
+            listEntry.attr("data-mealID", mealID)
+            var recipeDiv = $("<div>");
+            recipeDiv.attr("class", "recipe-description");
+            var recipeFig = $("<figure>");
+            recipeFig.attr("class", "image is-128x128 recipe-img");
+            var recipeImg = $("<img>");
+            recipeImg.attr("src", savedFavorites[mealID].recipesInfo.image);
+            var recipeTitle = $("<p>");
+            recipeTitle.text(savedFavorites[mealID].recipesInfo.title)
+            recipeTitle.attr("style", "font-weight: bold");
+            var recipeTime = $("<p>");
+            recipeTime.text("Minutes to prepare: " + savedFavorites[mealID].recipesInfo.readyInMinutes)
+            var recipeServings = $("<p>");
+            recipeServings.text("Serving size: " + savedFavorites[mealID].recipesInfo.servings)
+            recipeFig.append(recipeImg)
+            recipeDiv.append(recipeFig)
+            recipeDiv.append(recipeTitle)
+            recipeDiv.append(recipeTime)
+            recipeDiv.append(recipeServings)
+            listEntry.append(recipeDiv)
+            $("#results-list").append(listEntry)
+        }
     }
 }
 
+//Function that displays the saved favorite recipe when the entry in the saved favorites list is clicked on
 function displayFavoriteRecipe(mealID) {
     var ingredients = $("<ol>");
     var recipe = savedFavorites[`${mealID}`]
 
-    $("#recipe-title").html(`${recipe.payload.title} &nbsp; &nbsp; <span id="add-favorite">⭑</span>`);
+    $("#recipe-title").html(`${recipe.payload.title} &nbsp; &nbsp; <span data-mealID="${mealID}" id="remove-favorite">⭑</span>`);
     for (var i = 0; i < recipe.payload.ingr.length; i++) {
         var ingredientIndiv = $("<li>");
         ingredientIndiv.text(recipe.payload.ingr[i]);
@@ -244,9 +302,14 @@ function displayFavoriteRecipe(mealID) {
     instructions.html(recipe.recipesInfo.instructionsList);
 
     var instructionsTitle = $("<h3>");
+    instructionsTitle.attr("class", "inst-title")
     instructionsTitle.text("Instructions: ")
     var ingredientsTitle = $("<h3>");
+    ingredientsTitle.attr("class", "inst-title")
     ingredientsTitle.text("Ingredients: ")
+
+    ingredients.attr("class", "ingredients-list")
+    instructions.attr("class", "instructions-list")
 
     $("#recipe-inst").append(recipeImg)
     $("#recipe-inst").append(ingredientsTitle)
@@ -254,16 +317,17 @@ function displayFavoriteRecipe(mealID) {
     $("#recipe-inst").append(instructionsTitle)
     $("#recipe-inst").append(instructions);
 
+
     nutritionDiv.empty();
 
-    var recipe = savedFavorites[mealID];
-    var nutritionLabel = $("<div>");
-
-    nutritionLabel.attr("id", "nutrition-label");
-    nutritionDiv.append(nutritionLabel);
-
-    nutritionLabel.nutritionLabel(new NutritionObject(recipe));
-
+    if (typeof recipe.totalDaily === 'undefined') {
+        nutritionDiv.append("<p> Not able to process nutritional info for this recipe.</p>")
+    } else {
+        var nutritionLabel = $("<div>");
+        nutritionLabel.attr("id", "nutrition-label");
+        nutritionDiv.append(nutritionLabel);
+        nutritionLabel.nutritionLabel(new NutritionObject(recipe));
+    }
 }
 
 
@@ -273,14 +337,13 @@ function getIngredients(recipeIndex) {
     var recipe = recipes[recipeIndex];
     var mealID = recipe.recipesInfo.id;
     recipe.recipesInfo.instructionsList = [];
-
     recipe.payload = {
         title: recipe.recipesInfo.title,
         yeild: recipe.recipesInfo.servings,
         url: recipe.recipesInfo.sourceUrl,
         ingr: []
     };
-    var spoontacularAPIKey = "67ecadda6de74697a2dbc8590ce5c42c";
+    var spoontacularAPIKey = "5def404641f24722b2b210db9d881179";
 
 
 
@@ -315,9 +378,9 @@ function getIngredients(recipeIndex) {
             recipeImg.attr("src", recipe.recipesInfo.image)
 
         }
-        if(recipe.recipesInfo.id in savedFavorites){
+        if (recipe.recipesInfo.id in savedFavorites) {
             $("#recipe-title").html(`${recipe.payload.title} &nbsp; &nbsp; <span>⭑</span>`);
-        }else{
+        } else {
             $("#recipe-title").html(`${recipe.payload.title} &nbsp; &nbsp; <span data-index='${recipeIndex}' id="add-favorite">✩</span>`);
         }
 
@@ -330,8 +393,8 @@ function getIngredients(recipeIndex) {
         ingredientsTitle.attr("class", "inst-title")
         ingredientsTitle.text("Ingredients: ")
 
-        ingredients.attr("id", "ingredients-list")
-        instructions.attr("id", "instructions-list")
+        ingredients.attr("class", "ingredients-list")
+        instructions.attr("class", "instructions-list")
 
         $("#recipe-inst").append(recipeImg)
         $("#recipe-inst").append(ingredientsTitle)
@@ -343,3 +406,28 @@ function getIngredients(recipeIndex) {
         getNutritionInfo(recipeIndex);
     })
 }
+
+//On click function to toggle visibility for the search results on mobile, using the buttons that only pop up on mobile
+$(document).on("click", "#mobile-search", function(event) {
+    event.preventDefault();
+    $("#results-list").css("display", "block")
+    $("#recipe-info").css("display", "none")
+})
+
+// On-click function for the recipe view button on mobile
+$(document).on("click", "#mobile-recipe", function(event) {
+    event.preventDefault();
+    $("#results-list").css("display", "none")
+    $("#recipe-info").css("display", "block");
+    $("#recipe-inst").css("display", " block");
+    $("#recipe-nutrition").css("display", "none");
+})
+
+// On-click function for the nutrition label view on mobile
+$(document).on("click", "#mobile-nutrition", function(event) {
+    event.preventDefault();
+    $("#results-list").css("display", "none");
+    $("#recipe-info").css("display", "block");
+    $("#recipe-inst").css("display", "none");
+    $("#recipe-nutrition").css("display", "block");
+})
