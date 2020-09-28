@@ -85,12 +85,12 @@ body {
     font-size: 20px;
 }
 
-#ingredients-list {
+.ingredients-list {
     padding-left: 35px;
     padding-bottom: 20px;
 }
 
-#instructions-list {
+.instructions-list {
     padding-left: 35px;
 }
 
@@ -101,8 +101,7 @@ body {
 
 #mobile-buttons {
     padding-top: 10px;
-    margin: 0 auto; 
-    display: none;
+    margin: auto;
 }
 
 #add-favorite:hover::after{
@@ -110,33 +109,73 @@ body {
     opacity: 50%;
     font-size: 13pt;
 }
+
 #remove-favorite:hover::after{
 
     content:" ~ Remove from Favorites";
     opacity: 50%;
     font-size: 13pt;
 }
+
 .favorites-link{
     color: rgb(76, 76, 235);
     cursor: pointer;
 }
 
-.desktop-hide {
-    display: none;
-}
+@media screen and (max-width: 600px) {
 
-.mobile-show {
-    display: none;
-}
+    .hero {
+        padding-bottom: 0px;
+    }
 
-@media only screen and (max-width: 600px) {
+    .title {
+        font-size: 35px;
+        text-align: center;
+    }
+
+    .subtitle {
+        font-size: 18px;
+        text-align: center;
+    }
+
     .mobile-hide {
         display: none;
     }
 
     .mobile-show {
-        display: flex;
-        align-content: center;
+        display: block;
+    }
+
+    .desktop-hide {
+        display: none;
+    }
+
+    #search-area {
+        padding-top: 0px;
+    }
+
+    #search-results {
+        padding-top: 0px;
+    }
+
+    #recipe-info {
+        padding-top: 0px;
+    }
+
+
+
+
+    
+  }
+
+  @media screen and (min-width: 601px) {
+
+    .mobile-show {
+        display: none;
+    }
+
+    .desktop-hide {
+        display: none;
     }
     
   }
