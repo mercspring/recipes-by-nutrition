@@ -1,6 +1,6 @@
 # Recipes by Nutrition Project
 
-
+![site image](./recipe-by-nutrition.png)
 ## Introduction 
 
 The website app our group created allows a user to enter a desired meal into a search input field, which will return a list of recipes (results) that the user can then click on to display an image of the meal, ingredients, nutritional value, and cooking instructions. Any previous searches are saved in the users search history and can also be added to a "favorites" section on a list. 
@@ -42,3 +42,6 @@ Bulma
 
 Below is a link to the Nutritionix's GitHub account which provided us with the nutrition label we used within our app.
 Nutritionix (https://github.com/nutritionix/nutrition-label)
+
+## Live Site
+https://mercspring.github.io/recipes-by-nutrition/
