@@ -69,8 +69,6 @@ function getNutritionInfo(recipeIndex) {
 
     // $("#recipe-nutrition").empty();
     var recipe = recipes[recipeIndex];
-    console.log(recipeIndex)
-    console.log(recipe)
 
     var edamamAppID = "33eb5757";
     var edamamAppKey = "3f49d15bad2ccb193b05ed14bf175958";
@@ -151,7 +149,6 @@ $(document).on("click", "#remove-favorite", function (event) {
 //This function accepts a search term to be run through the spoonacular search api. It then populates the recipes array the resulting recipesInfo objects
 function getRecipes(searchTerm) {
 
-    console.log("running search")
     searchTerm = searchTerm.trim()
     var spoontacularAPIKey = "5babb627a31c457eabcb2fd3a13e65c3";
     var spoontacularQueryURL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${spoontacularAPIKey}&query=${searchTerm}&instructionsRequired=true&addRecipeInformation=true`
@@ -353,7 +350,6 @@ function getIngredients(recipeIndex) {
         url: queryURL
     }).then(function (response) {
         recipe.recipesInfo.instructionsBlob = response.instructions;
-        console.log(response)
 
         var instructions = $("<ol>");
 
